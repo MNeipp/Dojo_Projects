@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/yeti/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-chJtTd1EMa6hQI40eyJWF6829eEk4oIe7b3nNtUni7VxA3uHc/uIM/8ppyjrggfV" crossorigin="anonymous">
+    <title>Register as a student</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-">
+        <a class="navbar-brand">Test App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+          aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <div class="navbar-nav mr-auto">
+            <a class="nav-link nav-item" href="dashboard.html">Home <span class="sr-only">(current)</span></a>
+          </div>
+          <a class="nav-link navbar-text nav-item text-light" href="login.html">Sign in</a>
+        </div>
+      </nav>
+      <br>
+    <div>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="text-danger">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 mb-4 ml-5">
+                <h1 class="">Register</h1>
+                <form action="{%url 'process' %}" class="mt-4" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="email" class="col-form-label">Email:</label>
+                        <input type="email" class="form-control col-sm-9" name="email" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="first_name" class="col-form-label">First Name:</label>
+                        <input type="text" class="form-control col-sm-9" name="first_name" id="last_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name" class="col-form-label">Last Name:</label>
+                        <input type="text" class="form-control col-sm-9" name="last_name" id="last_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-form-label">Password:</label>
+                        <input type="password" class="form-control col-sm-9" name="password" id="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password" class="col-form-label">Confirm Password:</label>
+                        <input type="password" class="form-control col-sm-9" name="confirm_password" id="confirm_password">
+                    </div>
+                </form>
+                <!-- <input type="submit" value="Register" class="col-9 col-md-3 btn btn-info"> -->
+                <div class="row col-sm-12 col-md-9 p-0 ml-0">
+                    <a href="dashboard.html" class="col-sm-12 col-md-3 btn btn-primary text-white ml-auto">Register</a>
+                </div>               
+                 <br>
+                <br>
+                <a href="login.html"><u>Already have an account? Login!</u></a>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/yeti/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-chJtTd1EMa6hQI40eyJWF6829eEk4oIe7b3nNtUni7VxA3uHc/uIM/8ppyjrggfV" crossorigin="anonymous">
+    <title>Login to your account</title>
+</head>
+
+<body class="bg-secondary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-">
+        <a class="navbar-brand">Test App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+          aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <div class="navbar-nav mr-auto">
+            <a class="nav-link nav-item" href="{% url 'home' %}">Home</a>
+          </div>
+              <a class="nav-link navbar-text text-light disabled" href="{% url 'signin' %}"><span class="sr-only">(current)</span>Sign in</a>
+        </div>
+      </nav>
+      <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 mb-4 ml-5">
+                <h1 class="">Login</h1>
+                <form action="{%url 'login' %}" class="mt-4" method="POST" id="login-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="email" class="col-form-label">Email:</label>
+                        <input type="email" class="form-control col-sm-9" name="email" id="email" value="{{email}}">
+                    {% for message in messages %}
+                        {% if "email" in message.extra_tags %}
+                            <p class="text-danger"><small>{{message}}</small></p>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-form-label">Password:</label>
+                        <input type="password" class="form-control col-sm-9" name="password" id="password">
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if "password" in message.extra_tags %}
+                            <p class="text-danger"><small>{{message}}</small></p> 
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                    </div>
+                </form>
+                <div class="row col-sm-12 col-md-9 p-0 ml-0">
+                    <input type="submit" value="Login" form="login-form" class="col-sm-12 col-md-3 btn btn-primary text-white ml-auto">
+                </div> 
+                <br>
+                <br>
+                <a href="{% url 'register' %}"><u>Don't have an account? Register!</u></a>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
+</html>

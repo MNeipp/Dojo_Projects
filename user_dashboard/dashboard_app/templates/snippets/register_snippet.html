@@ -1,0 +1,30 @@
+
+{% for message in messages %}
+    {% if "email" in message.extra_tags %}
+        <p class="text-danger" id="email_error"><small>{{message}}</small></p>
+    {% endif %}
+{% endfor %}
+
+{% for message in messages %}
+    {% if "first_name" in message.extra_tags %}
+        <p class="text-danger" id="first_name_error"><small>{{message}}</small></p>
+    {% endif %}
+{% endfor %}
+
+{% for message in messages %}
+    {% if "last_name" in message.extra_tags %}
+        <p class="text-danger" id="last_name_error"><small>{{message}}</small></p>
+    {% endif %}
+{% endfor %}
+
+{% for message in messages %}
+    {% if "password" in message.extra_tags %}
+        <p class="text-danger" id="password_error"><small>{{message}}</small></p>
+    {% endif %}
+{% endfor %}
+
+{% for message in messages %}
+    {% if "confirm" in message.extra_tags %}
+        <p class="text-danger" id="confirm_error"><small>{{message}}</small></p>
+    {% endif %}
+{% endfor %}

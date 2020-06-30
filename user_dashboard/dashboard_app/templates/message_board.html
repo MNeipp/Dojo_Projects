@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/yeti/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-chJtTd1EMa6hQI40eyJWF6829eEk4oIe7b3nNtUni7VxA3uHc/uIM/8ppyjrggfV" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/0eb52090db.js" crossorigin="anonymous"></script>
+    <title>{{user.first_name}}'s Message Board</title>
+</head>
+
+<body class="bg-secondary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-">
+        <a class="navbar-brand">Dojo-U</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <div class="navbar-nav mr-auto">
+                <a class="nav-link nav-item" href="{% url 'dashboard' %}">Dashboard</a>
+                <a class="nav-link nav-item" href="{% url 'profile' %}">Profile</a>
+                <a class="nav-link nav-item active disabled" href="{% url 'message_board' logged_user.id %}"><span
+                        class="sr-only">(current)</span>Message Board</a>
+            </div>
+            <div class="navbar-nav ml-auto">
+                <a class="nav-link nav-item" href="{% url 'logout' %}">Log Out</a>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <div class="container">
+        <h3 class="mb-4"><strong>{{user.first_name}} {{user.last_name}}</strong></h3>
+        <div class="user-info ml-4">
+            <p>Registered on: {{user.dateCreated}}</p>
+            <p>User ID: {{user.id}}</p>
+            <p>Email: {{user.email}}</p>
+            <p>Description: {{user.description}}</p>
+        </div>
+        <div class="row ml-2">
+            <div class="col-sm-12">
+                <form action="{% url 'make_post' user.id %}" method="POST" id="message_form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="message" class="col-form-label"><strong>Leave a message for
+                                {{user.first_name}}</strong></label>
+                        <textarea class="form-control" name="message" id="message" rows="5"
+                            style="resize:none;"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="row col-sm-12 px-3 ml-0 mt-1">
+                <input form="message_form" type="submit" class="col-sm-12 col-md-1 btn btn-primary text-white ml-auto"
+                    value="Post"></input>
+            </div>
+        </div>
+        <hr>
+        <div id="posts">
+            {% for post in user.board_posts.all reversed %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 d-flex justify-content-between">
+                        <p class="inline-block"><strong><a
+                                    href="{% url 'message_board' post.creator.id %}">{{post.creator.first_name}}
+                                    {{post.creator.last_name}}</a> wrote:</strong></p>
+                        <p class="inline-block"><em>{{post.whenCreated}}</em></p>
+                    </div>
+                    <div class="col-sm-12 ml-4 d-flex justify-content-between">
+                        <p class="inline-block">{{post.content}}</p>
+                        {% if post.canDelete == True %}
+                        <form action="{% url 'delete_post' user.id %}" method="POST" ajax="delete_post">
+                            {% csrf_token %}
+                            <input type="hidden" name="post_id" value="{{post.id}}">
+                            <button type="submit" class="btn btn-warning btn-sm ">Delete Post</button>
+                        </form>
+                        {% endif %}
+                    </div>
+                    <br>
+                    <div class="col-sm-12 ml-4">
+                        {% if logged_user in post.likes.all %}
+                        <form action="{% url 'unlike_post' post.id %}" method='POST' ajax="unlike_post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-info" data-toggle="tooltip" data-placement="right"
+                                title="{% for user in post.likes.all %} {{user.first_name }} {{user.last_name}} {% endfor %}"><i
+                                    class="fas fa-thumbs-up"></i></button>
+                            <span class="text-info"><em>{{post.numberOfLikes}}</em></span>
+                            {% else %}
+                            <form action="{% url 'like_post' post.id %}" method='POST' ajax="like_post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary" data-toggle="tooltip"
+                                    data-placement="right"
+                                    title="{% for user in post.likes.all %} {{user.first_name }} {{user.last_name}} {% endfor %}"><i
+                                        class="fas fa-thumbs-up"></i></button>
+                                <span class="text-info"><em>{{post.numberOfLikes}}</em></span>
+                            </form>
+                            {% endif %}
+                    </div>
+
+                </div>
+                {% for comment in post.has_comments.all %}
+                <div class="row ml-4 mt-4">
+                    <div class="col-sm-12 d-flex justify-content-between ">
+                        <p class="inline-block"><strong><a
+                                    href="{% url 'message_board' comment.creator.id %}">{{comment.creator.first_name}}
+                                    {{comment.creator.last_name}}</a>
+                                wrote:</strong></p>
+                        <p class="inline-block"><em>{{comment.whenCreated}}</em></p>
+                    </div>
+                    <div class="col-sm-12 ml-4 d-flex justify-content-between">
+                        <p class="inline-block">{{comment.content}}</p>
+                        {% if comment.canDelete == True %}
+                        <form action="{% url 'delete_comment' user.id %}" method="POST" ajax="delete_comment">
+                            {% csrf_token %}
+                            <input type="hidden" name="comment_id" value="{{comment.id}}">
+                            <button type="submit" class="btn btn-warning btn-sm ">Delete Comment</button>
+                        </form>
+                        {% endif %}
+                    </div>
+                    <br>
+                    <div class="col-sm-12 ml-4">
+                        {% if logged_user in comment.likes.all %}
+                        <form action="{% url 'unlike_comment' comment.id %}" method='POST' ajax="unlike_comment">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-info"><i class="fas fa-thumbs-up"></i></button>
+                            <span class="text-info"><em>{{comment.numberOfLikes}}</em></span>
+                        </form>
+                        {% else %}
+                        <form action="{% url 'like_comment' comment.id %}" method='POST' ajax="like_comment">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-thumbs-up"></i></button>
+                            <span class="text-info"><em>{{comment.numberOfLikes}}</em></span>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="row mt-4 ml-4">
+                    <div class="col-sm-12 col-md-12 ml-4">
+                        <form action="{% url 'make_comment' post.id %}" method="POST" id="comment_form_{{post.id}}"
+                            ajax="make_comment">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <textarea class="form-control" name="comment" id="comment" rows="5" style="resize:none;"
+                                    placeholder="make a comment"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row col-sm-12 ml-4 mt-1 d-flex justify-content-end">
+                        <input form="comment_form_{{post.id}}" type="submit"
+                            class="col-sm-12 col-md-2 btn btn-success text-white ml-auto" value="Comment">
+                    </div>
+                </div>
+            </div>
+            <hr>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $('#message_form').submit(function (e) {
+        e.preventDefault()
+        $.post({
+            url: "{% url 'make_post' user.id %}",
+            data: $(this).serialize(),
+            success: function (serverResponse) {
+                $("#posts").html(serverResponse)
+            }
+        })
+        $(this).trigger('reset')
+    })
+
+    $('#posts').on('submit', '[ajax]', function (e) {
+        e.preventDefault()
+        form_url = $(this).attr("action")
+        $.post({
+            url: form_url,
+            data: $(this).serialize(),
+            success: function (serverResponse) {
+                $("#posts").html(serverResponse)
+            }
+        })
+        $(this).trigger('reset')
+    })
+</script>
+
+</html>

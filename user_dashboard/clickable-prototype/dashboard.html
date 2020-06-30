@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/yeti/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-chJtTd1EMa6hQI40eyJWF6829eEk4oIe7b3nNtUni7VxA3uHc/uIM/8ppyjrggfV" crossorigin="anonymous">
+  <title>Welcome!</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-">
+      <a class="navbar-brand">Dojo-U</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <div class="navbar-nav mr-auto">
+          <a class="nav-link nav-item active disabled" href="dashboard.html">Dashboard <span class="sr-only">(current)</span></a>
+          <a class="nav-link nav-item" href="profile.html">Profile</a>
+          <a class="nav-link nav-item" href="message_board.html">Message Board</a>
+        </div>
+        <a class="nav-link text-light" href="home.html">Log Off</a>
+      </div>
+    </nav>
+    <br>
+    <div class="container">
+      <div class="row d-flex">
+        <h2 class="mb-4 ml-3">Manage Users</h2>
+        <a href="add.html" class="btn btn-primary ml-auto mr-3"  style="height:40px">Add User</a>
+      </div>
+        <table class="table table-responsive-sm table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Created At</th>
+                    <th>User Level</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><a href="profile.html">John</a></td>
+                    <td>john@email.com</td>
+                    <td>12/12/20</td>
+                    <td>Admin</td>
+                    <td><a href="profile.html" class="mr-3">Edit</a><a href=""class="border-left pl-3">Remove</a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><a href="profile.html">Jacob</a></td>
+                    <td>jacob@email.com</td>
+                    <td>12/12/20</td>
+                    <td>User</td>
+                    <td><a href="profile.html" class="mr-3">Edit</a><a href=""class="border-left pl-3">Remove</a></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><a href="profile.html">Jeremy</a></td>
+                    <td>jeremy@email.com</td>
+                    <td>12/12/20</td>
+                    <td>User</td>
+                    <td><a href="profile.html" class="mr-3">Edit</a><a href=""class="border-left pl-3">Remove</a></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><a href="profile.html">Joseph</a></td>
+                    <td>joseph@email.com</td>
+                    <td>12/12/20</td>
+                    <td>Admin</td>
+                    <td><a href="profile.html" class="mr-3">Edit</a><a href=""class="border-left pl-3">Remove</a></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><a href="profile.html">James</a></td>
+                    <td>james@email.com</td>
+                    <td>12/12/20</td>
+                    <td>User</td>
+                    <td><a href="profile.html" class="mr-3">Edit</a><a href=""class="border-left pl-3">Remove</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
+</html>
