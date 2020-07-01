@@ -1,3 +1,3 @@
 pokemon/
-supplement_store/store_app/__pycache__/*
-supplement_store/main/__pycache__/*
+supplement_store/store_app/__pycache__/
+supplement_store/main/__pycache__/
