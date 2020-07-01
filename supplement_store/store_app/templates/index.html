@@ -36,7 +36,7 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link disabled" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
@@ -59,7 +59,7 @@
                 </li>
             </ul>
             <div class="navbar-nav ml-auto">
-                <a href="" class="nav-link mt-2"><small>Login / Register</small></a>
+                <a href="{% url 'login' %}" class="nav-link mt-2"><small>Login</small></a>
                 <a href="" class="nav-link"><i class="fa fa-2x fa-shopping-cart"></i><span
                         class='badge badge-light text-dark' id='lblCartCount'> 4 </span></a>
             </div>
@@ -69,12 +69,12 @@
 
         <div class="jumbotron">
             <h1 class="display-4">Evolution Compounds</h1>
-            <p class="lead">Supplements to leave humanity behind!</p>
+            <p class="lead">Leave humanity behind!</p>
             <hr>
             <a href="" class="btn btn-primary">All Products</a>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-12">
                 <div id="productCarousel" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#productCarousel" data-slide-to="0" class="active"></li>
@@ -84,28 +84,36 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="{% static 'img/Protein.png' %}" class="d-block w-100" alt="Protein">
+                            <a href="#">
+                                <img src="{% static 'img/Protein.png' %}" class="d-block w-100" alt="Protein">
+                            </a>
                             <div class="carousel-caption d-none d-md-block">
-                                <h5 class="text-light">Protein Powders</h5>
+                                <h5 class="text-light">Protein Powder</h5>
                                 <p>Essential for building quality muscle</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="{% static 'img/pre-workout.png' %}" class="d-block w-100" alt="Pre-workout">
+                            <a href="">
+                                <img src="{% static 'img/pre-workout.png' %}" class="d-block w-100" alt="Pre-workout">
+                            </a>
                             <div class="carousel-caption d-none d-md-block">
                                 <h5 class="text-light">Pre-workouts</h5>
                                 <p>Ramp up your energy</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="{% static 'img/SARMS.png' %}" class="d-block w-100" alt="SARMS">
+                            <a href="">
+                                <img src="{% static 'img/SARMS.png' %}" class="d-block w-100" alt="SARMS">
+                            </a>
                             <div class="carousel-caption d-none d-md-block">
                                 <h5 class="text-light">Rearch Chemicals</h5>
                                 <p>Increase your recovery and strength</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="{% static 'img/AAS.png' %}" class="d-block w-100" alt="AAS">
+                            <a href="">
+                                <img src="{% static 'img/AAS.png' %}" class="d-block w-100" alt="AAS">
+                            </a>
                             <div class="carousel-caption d-none d-md-block">
                                 <h5 class="text-light">AAS</h5>
                                 <p>For the truly hardcore (members only)</p>
@@ -114,19 +122,19 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-md-6 col-sm-12">
                 <div class="bg-light d-flex justify-content-center align-items-center h-100">
                     <h3 class="lead"><em>Supplements for every purpose</em></h3>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
+            <div class="col-md-6 col-sm-12">
                 <div class="bg-light d-flex justify-content-center align-items-center h-100">
                     <h3 class="lead"><em>Bring your training to the next level</em></h3>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-12">
                 <div id="peopleCarousel" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#peopleCarousel" data-slide-to="0" class="active"></li>
