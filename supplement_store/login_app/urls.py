@@ -6,5 +6,4 @@ urlpatterns=[
     path('', login_views.login, name="login"),
     path('new', login_views.registration, name="registration"),
 
-
 ]
