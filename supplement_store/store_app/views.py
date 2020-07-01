@@ -7,3 +7,6 @@ def index(request):
 
 def shop(request):
     return render(request, "shop.html")
+
+def product_info(request, product_id):
+    return render(request, "product_info.html")

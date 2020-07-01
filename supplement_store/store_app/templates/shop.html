@@ -70,12 +70,11 @@
         <h1 class="display-4 text-white text-center">SHOP</h1>
         <br>
         <div class="row d-flex justify-content-between">
-            <a href="" class="btn btn-secondary col-sm-12 col-md-2">Protein</a>
-            <a href="" class="btn btn-secondary col-sm-12 col-md-2">Supplements</a>
-            <a href="" class="btn btn-secondary col-sm-12 col-md-3">Research Chemicals</a>
-            <a href="" class="btn btn-secondary col-sm-12 col-md-2">AAS</a>
-            <form action="" method="get" class="" id="#sort-by">
-                    <select class="custom-select h-100" name="sort-by">
+            <a href="" class="btn btn-secondary col-sm-12 col-md-2 mb-2">Protein</a>
+            <a href="" class="btn btn-secondary col-sm-12 col-md-2 mb-2">Supplements</a>
+            <a href="" class="btn btn-secondary col-sm-12 col-md-3 mb-2">Research Chemicals</a>
+            <a href="" class="btn btn-secondary col-sm-12 col-md-2 mb-2">AAS</a>
+                    <select class="custom-select col-sm-12 col-md-2" name="sort-by">
                         <option selected="">Sort by</option>
                         <option value="1">Best Selling</option>
                         <option value="2">Price Low to High</option>
@@ -84,93 +83,94 @@
                         <option value="3">Z-A</option>
                         <option value="3">By Review</option>
                       </select>
-            </form>
         </div>
 
-        <div class="row d-flex justify-content-between mt-5">
+        <div class="row d-flex justify-content-between mt-4">
             <div class="col-md-3 col-sm-12 text-center">
                 <p class="text-white">Whey Concentrate</p>
                 <img src="{% static 'img/Protein.png' %}"  class="w-100 center" alt="">
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Add to Cart</a>
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Info</a>
+                <p class="text-white mt-3">$59.99</p>
+                <a href="" class="btn btn-sm btn-outline-secondary mx-2">Add to Cart</a>
+                <a href="{% url 'product_info' 5 %}" class="btn btn-sm btn-outline-secondary my-2 mx-2">Info</a>
             </div>
             <div class="col-md-3 col-sm-12 text-center">
                 <p class="text-white">Whey Concentrate</p>
                 <img src="{% static 'img/Protein.png' %}"  class="w-100 center" alt="">
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Add to Cart</a>
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Info</a>
+                <p class="text-white mt-3">$59.99</p>
+                <a href="" class="btn btn-sm btn-outline-secondary mx-2">Add to Cart</a>
+                <a href="{% url 'product_info' 5 %}" class="btn btn-sm btn-outline-secondary my-2 mx-2">Info</a>
             </div>
             <div class="col-md-3 col-sm-12 text-center">
                 <p class="text-white">Whey Concentrate</p>
                 <img src="{% static 'img/Protein.png' %}"  class="w-100 center" alt="">
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Add to Cart</a>
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Info</a>
+                <p class="text-white mt-3">$59.99</p>
+                <a href="" class="btn btn-sm btn-outline-secondary mx-2">Add to Cart</a>
+                <a href="{% url 'product_info' 5 %}" class="btn btn-sm btn-outline-secondary my-2 mx-2">Info</a>
             </div>
             <div class="col-md-3 col-sm-12 text-center">
                 <p class="text-white">Whey Concentrate</p>
                 <img src="{% static 'img/Protein.png' %}"  class="w-100 center" alt="">
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Add to Cart</a>
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Info</a>
-            </div>
-        </div>
-        <div class="row d-flex justify-content-between mt-5">
-            <div class="col-md-3 col-sm-12 text-center">
-                <p class="text-white">Whey Concentrate</p>
-                <img src="{% static 'img/Protein.png' %}"  class="w-100 center" alt="">
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Add to Cart</a>
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Info</a>
-            </div>
-            <div class="col-md-3 col-sm-12 text-center">
-                <p class="text-white">Whey Concentrate</p>
-                <img src="{% static 'img/Protein.png' %}"  class="w-100 center" alt="">
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Add to Cart</a>
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Info</a>
-            </div>
-            <div class="col-md-3 col-sm-12 text-center">
-                <p class="text-white">Whey Concentrate</p>
-                <img src="{% static 'img/Protein.png' %}"  class="w-100 center" alt="">
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Add to Cart</a>
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Info</a>
-            </div>
-            <div class="col-md-3 col-sm-12 text-center">
-                <p class="text-white">Whey Concentrate</p>
-                <img src="{% static 'img/Protein.png' %}"  class="w-100 center" alt="">
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Add to Cart</a>
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Info</a>
+                <p class="text-white mt-3">$59.99</p>
+                <a href="" class="btn btn-sm btn-outline-secondary mx-2">Add to Cart</a>
+                <a href="{% url 'product_info' 5 %}" class="btn btn-sm btn-outline-secondary my-2 mx-2">Info</a>
             </div>
         </div>
         <div class="row d-flex justify-content-between mt-5">
             <div class="col-md-3 col-sm-12 text-center">
                 <p class="text-white">Whey Concentrate</p>
                 <img src="{% static 'img/Protein.png' %}"  class="w-100 center" alt="">
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Add to Cart</a>
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Info</a>
+                <p class="text-white mt-3">$59.99</p>
+                <a href="" class="btn btn-sm btn-outline-secondary mx-2">Add to Cart</a>
+                <a href="{% url 'product_info' 5 %}" class="btn btn-sm btn-outline-secondary my-2 mx-2">Info</a>
             </div>
             <div class="col-md-3 col-sm-12 text-center">
                 <p class="text-white">Whey Concentrate</p>
                 <img src="{% static 'img/Protein.png' %}"  class="w-100 center" alt="">
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Add to Cart</a>
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Info</a>
+                <p class="text-white mt-3">$59.99</p>
+                <a href="" class="btn btn-sm btn-outline-secondary mx-2">Add to Cart</a>
+                <a href="{% url 'product_info' 5 %}" class="btn btn-sm btn-outline-secondary my-2 mx-2">Info</a>
             </div>
             <div class="col-md-3 col-sm-12 text-center">
                 <p class="text-white">Whey Concentrate</p>
                 <img src="{% static 'img/Protein.png' %}"  class="w-100 center" alt="">
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Add to Cart</a>
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Info</a>
+                <p class="text-white mt-3">$59.99</p>
+                <a href="" class="btn btn-sm btn-outline-secondary mx-2">Add to Cart</a>
+                <a href="{% url 'product_info' 5 %}" class="btn btn-sm btn-outline-secondary my-2 mx-2">Info</a>
             </div>
             <div class="col-md-3 col-sm-12 text-center">
                 <p class="text-white">Whey Concentrate</p>
                 <img src="{% static 'img/Protein.png' %}"  class="w-100 center" alt="">
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Add to Cart</a>
-                <a href="" class="btn btn-sm btn-outline-secondary my-4 mx-2">Info</a>
+                <p class="text-white mt-3">$59.99</p>
+                <a href="" class="btn btn-sm btn-outline-secondary mx-2">Add to Cart</a>
+                <a href="{% url 'product_info' 5 %}" class="btn btn-sm btn-outline-secondary my-2 mx-2">Info</a>
             </div>
         </div>
 
-
-
+        <div class="row d-flex justify-content-center">
+            <ul class="pagination pagination-lg">
+                <li class="page-item disabled">
+                  <a class="page-link bg-primary text-secondary" href="#">&laquo;</a>
+                </li>
+                <li class="page-item active disabled">
+                  <a class="page-link bg-primary text-light" href="#">1</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link bg-primary text-secondary" href="#">2</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link bg-primary text-secondary" href="#">3</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link bg-primary text-secondary" href="#">4</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link bg-primary text-secondary" href="#">5</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link bg-primary text-secondary" href="#">&raquo;</a>
+                </li>
+              </ul>
+        </div>
     </div>
-
-
-    
 </body>
 </html>
