@@ -10,3 +10,6 @@ def shop(request):
 
 def product_info(request, product_id):
     return render(request, "product_info.html")
+
+def cart(request):
+    return render(request, "cart.html")
