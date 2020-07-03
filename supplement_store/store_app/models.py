@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from login_app.models import User
+from decimal import Decimal
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
@@ -18,7 +19,11 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def discount(self, discount):
-        self.price = self.price*(discount / 100)
+        self.price = Decimal(float(self.price)-(float(self.price)*(discount / 100)))
+        self.save()
+    
+    def markup(self,percent):
+        self.price= Decimal(float(self.price)+(float(self.price)*(discount / 100)))
         self.save()
 
 class Cart(models.Model):
