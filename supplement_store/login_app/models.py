@@ -55,6 +55,7 @@ class User(models.Model):
     password = models.CharField(max_length=255)
     user_level_choices =[
         (0,"Normal"),
+        (5, "Member"),
         (9,"Admin")
     ]
     user_level = models.IntegerField(choices=user_level_choices, default=0)
