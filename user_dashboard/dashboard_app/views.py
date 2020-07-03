@@ -40,6 +40,7 @@ def update_info(request):
         logged_user.email = request.POST['email']
         logged_user.first_name = request.POST['first_name']
         logged_user.last_name = request.POST['last_name']
+        logged_user.image = request.FILES['profile_picture']
         logged_user.save()
         return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 

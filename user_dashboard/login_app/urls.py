@@ -1,5 +1,8 @@
 from django.urls import path
 from . import views as login_views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns =[
     path('signin/',login_views.signin, name="signin"),

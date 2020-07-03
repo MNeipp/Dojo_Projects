@@ -31,7 +31,9 @@
     </nav>
     <br>
     <div class="container">
-        <h3 class="mb-4"><strong>{{user.first_name}} {{user.last_name}}</strong></h3>
+        <h3 class="mb-2"><strong>{{user.first_name}} {{user.last_name}}</strong></h3>
+
+        <img class= "rounded-circle col-2 mb-2" src="{{ user.image.url }}" alt="profile.pic">
         <div class="user-info ml-4">
             <p>Registered on: {{user.dateCreated}}</p>
             <p>User ID: {{user.id}}</p>

@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 import bcrypt, re
+from PIL import Image
 
 # Create your models here.
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
@@ -58,9 +59,13 @@ class User(models.Model):
     ]
     description = models.TextField(null=True)
     user_level = models.IntegerField(choices=user_level_choices, default=0)
+    image = models.ImageField(default='default.png', upload_to='profile_pics')
     created_at = models.DateTimeField(auto_now_add=True)
     edited_at = models.DateTimeField(auto_now=True)
     objects = userManager()
 
     def dateCreated(self):
         return self.created_at.strftime("%B %d, %Y")
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
