@@ -15,6 +15,7 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     stock = models.PositiveIntegerField(default=100)
     category = models.ForeignKey(Category, related_name="products", on_delete=models.CASCADE)
+    amount_sold = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
