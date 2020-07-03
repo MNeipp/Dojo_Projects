@@ -1,57 +1,44 @@
 from __future__ import unicode_literals
 from django.db import models
-import bcrypt, re
+from login_app.models import User
 
-# Create your models here.
-EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-
-class userManager(models.Manager):
-    def basic_validator(self, postData):
-        errors = {}
-        if len(postData['first_name']) < 2:
-            errors['first_name'] = "First name needs to be at least 2 characters long"
-        if len(postData['last_name']) < 2:
-            errors['last_name'] = "Last name needs to be at least 2 characters long"
-        if not EMAIL_REGEX.match(postData['email']):
-            errors['email'] = "Invalid email address"
-        result_email = User.objects.filter(email__iexact=(postData['email']))
-        if len(result_email) > 0:
-            errors['email'] = "That e-mail address is already registered"
-        if len(postData['password']) < 8:
-            errors['password'] = "Your password must be at least 8 characters long"
-        elif postData['password'] != postData['confirm_password']:
-            errors['confirm'] = "Passwords don't match."
-        return errors
-
-    def info_validator(self,postData):
-        errors = {}
-        logged_user = User.objects.get(id=postData['user_id'])
-        if len(postData['first_name']) < 2:
-            errors['first_name'] = "First name needs to be at least 2 characters long"
-        if len(postData['last_name']) < 2:
-            errors['last_name'] = "Last name needs to be at least 2 characters long"
-        if not EMAIL_REGEX.match(postData['email']):
-            errors['email'] = "Invalid email address"
-        result_email = User.objects.filter(email__iexact=(postData['email']))
-        if len(result_email) > 0 and postData['email'] != logged_user.email:
-            errors['email'] = "That e-mail address is already registered"
-        return errors
-    
-    def password_validator(self,postData):
-        errors={}
-        if len(postData['password']) < 8:
-            errors['password'] = "Your password must be at least 8 characters long"
-        elif postData['password'] != postData['confirm_password']:
-            errors['confirm'] = "Passwords don't match."
-        return errors
-
-
-
-class User(models.Model):
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    email = models.CharField(max_length=255)
-    password = models.CharField(max_length=255)
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+    parent_category = models.ForeignKey('self', null = True, blank = True, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-    edited_at = models.DateTimeField(auto_now=True)
-    objects = userManager()
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    description = models.TextField(blank=True)
+    stock = models.PositiveIntegerField(default=100)
+    category = models.ForeignKey(Category, related_name="products", on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def discount(self, discount):
+        self.price = self.price*discount
+        return self.price
+
+class Cart(models.Model):
+    user = models.ForeignKey(User, related_name="has_cart", on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def itemTotal(self):
+        return self.has_products.all().count()
+
+class CartItem(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    cart = models.ForeignKey(Cart, related_name="has_products", on_delete=models.CASCADE)
+
+    def totalPrice(self):
+        return self.product.price * self.quantity
+
+    
+
+
+
+
