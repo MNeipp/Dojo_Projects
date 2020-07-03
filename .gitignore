@@ -2,3 +2,5 @@ pokemon/
 supplement_store/store_app/__pycache__/
 supplement_store/main/__pycache__/
 supplement_store/login_app/__pycache__/
+supplement_store/db.sqlite3
+supplement_store/product.json

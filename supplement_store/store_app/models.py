@@ -18,8 +18,8 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def discount(self, discount):
-        self.price = self.price*discount
-        return self.price
+        self.price = self.price*(discount / 100)
+        self.save()
 
 class Cart(models.Model):
     user = models.ForeignKey(User, related_name="has_cart", on_delete=models.CASCADE)
