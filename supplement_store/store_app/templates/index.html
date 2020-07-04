@@ -59,7 +59,11 @@
                 </li>
             </ul>
             <div class="navbar-nav ml-auto">
+                {% if logged_user %}
+                <p class="nav-link mt-2 mr-4 active"> Welcome, {{logged_user.first_name}}!</p>
+                {% else %}
                 <a href="{% url 'login' %}" class="nav-link mt-2"><small>Login</small></a>
+                {% endif %}
                 <a href="" class="nav-link"><i class="fa fa-2x fa-shopping-cart"></i><span
                         class='badge badge-light text-dark' id='lblCartCount'> 4 </span></a>
             </div>

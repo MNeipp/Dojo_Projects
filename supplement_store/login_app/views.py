@@ -8,6 +8,25 @@ import bcrypt
 def login(request):
     return render(request, "login.html")
 
+def login_process(request):
+    if request.method=="POST":
+        if len(request.POST['email']) < 5:
+            messages.error(request, "Please enter a valid e-mail", extra_tags="email")
+            return redirect(reverse('login'))
+        user = User.objects.filter(email__iexact=request.POST['email'])
+        request.session['email'] = request.POST['email']
+        if user:
+            logged_user = user[0]
+            if bcrypt.checkpw(request.POST['password'].encode(), logged_user.password.encode()):
+                request.session['user_id'] = logged_user.id
+                return redirect(reverse('home'))
+            else:
+                messages.error(request,"Incorrect password", extra_tags="password")
+                return redirect(reverse('login'))
+        else:
+            messages.error(request, "E-mail not registered", extra_tags="email")
+            return redirect (reverse('login'))
+
 def registration(request):
     return render(request, "registration.html")
 
@@ -28,3 +47,7 @@ def create_user(request):
             if "user_id" not in request.session:
                 request.session['user_id'] = user.id
             return redirect (reverse("home"))
+
+def logout(request):
+    request.session.flush()
+    return redirect (reverse("home"))
