@@ -6,10 +6,9 @@ import bcrypt
 # Create your views here.
 
 def login(request):
-    return render(request, "login.html")
-
-def login_process(request):
-    if request.method=="POST":
+    if request.method == "GET":
+        return render(request, "login.html")
+    elif request.method == "POST":
         if len(request.POST['email']) < 5:
             messages.error(request, "Please enter a valid e-mail", extra_tags="email")
             return redirect(reverse('login'))
@@ -27,16 +26,16 @@ def login_process(request):
             messages.error(request, "E-mail not registered", extra_tags="email")
             return redirect (reverse('login'))
 
-def registration(request):
-    return render(request, "registration.html")
 
-def create_user(request):
-    if request.method == "POST":
+def registration(request):
+    if request.method == "GET":
+        return render(request, "registration.html")
+    elif request.method == "POST":
         errors = User.objects.basic_validator(request.POST)
         if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request,value, extra_tags=key)
-            return (reverse("login"))
+            return redirect (reverse('registration'))
         else:
             first_name = request.POST['first_name']
             last_name=request.POST['last_name']

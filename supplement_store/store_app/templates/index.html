@@ -60,7 +60,8 @@
             </ul>
             <div class="navbar-nav ml-auto">
                 {% if logged_user %}
-                <p class="nav-link mt-2 mr-4 active"> Welcome, {{logged_user.first_name}}!</p>
+                <p class="nav-link mt-2 mr-2 active"> Welcome, {{logged_user.first_name}}!</p>
+                <a href="{% url 'logout'%}" class="nav-link mt-2 mr-2"><small>Logout</small></a>
                 {% else %}
                 <a href="{% url 'login' %}" class="nav-link mt-2"><small>Login</small></a>
                 {% endif %}
