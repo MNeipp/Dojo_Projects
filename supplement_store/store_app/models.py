@@ -24,7 +24,7 @@ class Product(models.Model):
         self.save()
     
     def markup(self,percent):
-        self.price= Decimal(float(self.price)+(float(self.price)*(discount / 100)))
+        self.price= Decimal(float(self.price)+(float(self.price)*(percent / 100)))
         self.save()
 
 class Cart(models.Model):
