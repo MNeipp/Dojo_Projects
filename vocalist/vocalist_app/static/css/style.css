@@ -1,0 +1,107 @@
+
+  /*   font-family: 'Parisienne', cursive;*/
+
+  body {
+    font-family: 'Playfair Display', serif;
+    width: 100%;
+  }
+  
+  a{
+    color: black !important;
+    text-decoration: none;
+  }
+  
+  
+  a:hover {
+        color: #c8001d !important;
+        text-decoration: none;
+     }
+  
+  
+
+  /* insert background image to this section*/
+  .hero{
+    text-align: center;
+    background-image: url("/static/img/vocalist-hero.jfif");
+    background-position: center center;
+    background-size: cover; 
+    background-attachment: fixed;
+    height: 500px;
+    width:100%
+  }
+
+  .btn-custom {
+    background-color:#c8001d;
+    border-bottom: 2px solid #80011f;
+    color:white !important;
+    font-weight: bold;
+  }
+  
+  a.btn-custom:hover{
+    color:black!important;
+  }
+  
+  a.btn-custom:active{
+    position:relative;
+    top:1px;
+  }
+  
+
+
+  #The-List >h1{
+    font-family: Parisienne, cursive;
+    text-align: center;
+  }
+
+
+  /* insert background image to this section*/
+  .about-vocalist{
+    background-image: url("/static/img/vocalist-about.jfif");
+    background-position: center center;
+    background-size: cover;
+    height: 400px;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  
+
+  /* insert background image to this section*/
+  .summer-yaps{
+    background-image: url("/static/img/vocalist-summer.jfif");
+    background-position: center center;
+    background-size: cover;
+    height: 400px;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  
+  
+  .year-round-yaps{
+    background-image: url("/static/img/vocalist-year-round.jfif");    
+    background-position: center center;
+    background-size: cover;
+    height: 400px;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  /* insert background image to this section*/
+  
+  .box{
+    color: black;
+    background-color: #efefef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+  }
+  
+  
+  
+  .footer{
+    height: 150px;
+    color: white;
+    background-color: #2B2D2F;
+    width: 100%; 
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
