@@ -29,7 +29,7 @@
                     <div class="navbar-nav ml-auto">
                         <a class="nav-link font-weight-bold" href="#">About</a>
                         <a class="nav-link font-weight-bold" href="#">The List</a>
-                        <a class="nav-link font-weight-bold" href="#">Log In</a>
+                        <a class="nav-link font-weight-bold active disabled" href="#">Log In</a>
                     </div>
                 </div>
             </div>
@@ -67,14 +67,14 @@
                     </div>
                     <br>
                     <br>
-                    <a href="{% url 'register' %}">Don't have an account? Register!</a>
-                </div>
-                <div class="container-fluid d-flex align-items-center justify-content-center flex-wrap" style="background-color:#2B2D2F; height:125px">
-                    <hr class="border border-light w-100 mt-5 mb-0" >
-                    <small class="text-light mb-3"> &copy; Mason Gates</small>
-                
+                    <a href="{% url 'register' %}" class="font-weight-bold">Don't have an account? Register!</a>
                 </div>
             </div>
+        </div>
+        <div class="container-fluid d-flex align-items-center justify-content-center flex-wrap" style="background-color:#2B2D2F; height:125px">
+            <hr class="border border-light w-100 mt-5 mb-0" >
+            <small class="text-light mb-3"> &copy; Mason Gates</small>
+        
         </div>
     </div>
 

@@ -55,7 +55,9 @@
     top:1px;
   }
   
-
+a.active{
+  color:#c8001d !important;
+}
 
   #The-List >h1{
     font-family: Parisienne, cursive;
@@ -69,7 +71,11 @@
     background-position: center center;
     background-size: cover;
     height: 400px;
-    background-color: rgba(0, 0, 0, 0.3);
+    transition: all .5s;
+  }
+
+  .about-vocalist:hover{
+    transform: scale(1.03);
   }
   
 
@@ -79,7 +85,11 @@
     background-position: center center;
     background-size: cover;
     height: 400px;
-    background-color: rgba(0, 0, 0, 0.3);
+    transition: all .5s;
+  }
+
+  .summer-yaps:hover{
+    transform: scale(1.03);
   }
   
   
@@ -88,7 +98,11 @@
     background-position: center center;
     background-size: cover;
     height: 400px;
-    background-color: rgba(0, 0, 0, 0.3);
+    transition: all .5s;
+  }
+
+  .year-round-yaps:hover {
+    transform: scale(1.03);
   }
   /* insert background image to this section*/
   

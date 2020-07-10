@@ -28,7 +28,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav ml-auto">
                         <a class="nav-link font-weight-bold" href="#">About</a>
-                        <a class="nav-link font-weight-bold" href="#">The List</a>
+                        <a class="nav-link font-weight-bold" href="{% url 'list' %}">The List</a>
                         <a class="nav-link font-weight-bold" href="{% url 'login' %} ">Log In</a>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
         <div class="container-fluid hero d-flex justify-content-center align-items-center text-center flex-wrap">
             <h1 class="display-4 text-white font-weight-bold ">Access all the info you need on Young Artist Programs
             </h1>
-            <a href="" class="btn btn-custom">Start Your Search</a>
+            <a href="{% url 'list' %}" class="btn btn-custom">Start Your Search</a>
         </div>
         <div id="The-List" class="container-fluid d-flex text-center flex-column my-5">
             <h1 class="display-4 font-weight-bold">The List</h1>
@@ -92,11 +92,11 @@
         </div>
         <div class="container-fluid">
             <div class="row d-flex justify-content-center mb-5">
-                <a href="" class="btn btn-custom mt-4">Browse The List</a>
+                <a href="{% url 'list' %}" class="btn btn-custom mt-4">Browse The List</a>
             </div>
             <div class="row d-flex justify-content-around p-4" style="background-color:#efefef">
                 <div class="border border-dark col-md-5 text-center pt-5 px-1 pb-0">
-                    <a href="">
+                    <a href="{% url 'login' %}">
                         <h1 class="display-4 font-weight-bold pb-3" style="font-family: Parisienne, cursive;">Sign In</h1>
                         <h6 class="font-weight-bold py-1 mb-1">Sign in to your VocaList account</h6>
                     </a>
