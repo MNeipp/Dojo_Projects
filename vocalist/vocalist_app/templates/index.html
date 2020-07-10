@@ -17,7 +17,7 @@
 
 <body>
     <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#efefef">
             <div class="container-fluid">
                 <a href="{% url 'index' %}"><img src="{% static 'img/vocalist-logo.png' %}" class="navbar-brand"
                         height=150px width=400px></img></a>
@@ -29,7 +29,7 @@
                     <div class="navbar-nav ml-auto">
                         <a class="nav-link font-weight-bold" href="#">About</a>
                         <a class="nav-link font-weight-bold" href="#">The List</a>
-                        <a class="nav-link font-weight-bold" href="#">Log In</a>
+                        <a class="nav-link font-weight-bold" href="{% url 'login' %} ">Log In</a>
                     </div>
                 </div>
             </div>
@@ -96,13 +96,17 @@
             </div>
             <div class="row d-flex justify-content-around p-4" style="background-color:#efefef">
                 <div class="border border-dark col-md-5 text-center pt-5 px-1 pb-0">
-                    <h1 class="display-4 font-weight-bold pb-3" style="font-family: Parisienne, cursive;">Sign In</h1>
-                    <h6 class="font-weight-bold py-1 mb-1">Sign in to your VocaList account</h6>
-                </div>
-                <div class="border border-dark col-md-5 text-center pt-5 px-1 pb-0">
-                    <h1 class="display-4 font-weight-bold pb-3" style="font-family: Parisienne, cursive;">Sign Up</h1>
-                    <h6 class="font-weight-bold py-1 mb-1">Sign up for a VocaList account</h6>
-                </div>
+                    <a href="">
+                        <h1 class="display-4 font-weight-bold pb-3" style="font-family: Parisienne, cursive;">Sign In</h1>
+                        <h6 class="font-weight-bold py-1 mb-1">Sign in to your VocaList account</h6>
+                    </a>
+                    </div>
+                    <div class="border border-dark col-md-5 text-center pt-5 px-1 pb-0">
+                    <a href="{% url 'register' %}">
+                        <h1 class="display-4 font-weight-bold pb-3" style="font-family: Parisienne, cursive;">Sign Up</h1>
+                        <h6 class="font-weight-bold py-1 mb-1">Sign up for a VocaList account</h6>
+                    </a>
+                    </div>
             </div>
         </div>
         <div class="container-fluid d-flex align-items-center justify-content-center flex-wrap" style="background-color:#2B2D2F; height:125px">
