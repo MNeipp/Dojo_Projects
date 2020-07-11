@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang=>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Voca\LIST</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
+    <!-- Google Font embed -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Parisienne&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/0eb52090db.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#efefef">
+            <div class="container-fluid">
+                <a href="{% url 'index' %}"><img src="{% static 'img/vocalist-logo.png' %}" class="navbar-brand"
+                        height=150px width=400px></img></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ml-auto">
+                        <a class="nav-link font-weight-bold" href="#">About</a>
+                        <a class="nav-link font-weight-bold" href="{% url 'list' %}">The List</a>
+                        <a class="nav-link font-weight-bold" href="{% url 'login' %} ">Log In</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid mt-4">
+            <div class="row d-flex justify-content-between">
+                <div class="col-md-2">
+                    <img src="{% static '/img/profile-image2.jpg' %}" alt="" style="height:175px">
+                    <div class="form-group mt-3">
+                        <input type="file" name="profile-picture" id="profile-picture" class="form-control-file">
+                        <small id="fileHelp" class="form-text text-muted">Upload a new profile picture</small>
+                    </div>
+                    <p class="font-weight-bold">Reviews: 12</p>
+                </div>
+                <div class="col-md-4">
+                    <form action="" class="mt-0" method="POST" id="update-info">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="email" class="col-form-label text-black">Email:</label>
+                            <input type="email" class="form-control col-sm-9" name="email" id="email"
+                                value="mason@email.com">
+                            {% for message in messages %}
+                            {% if "email" in message.extra_tags %}
+                            <p class="text-danger"><small>{{message}}</small></p>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="form-group">
+                            <label for="first_name" class="col-form-label text-black">First Name:</label>
+                            <input type="text" class="form-control col-sm-9" name="first_name" id="first_name"
+                                value="Mason">
+                            {% for message in messages %}
+                            {% if "first_name" in message.extra_tags %}
+                            <p class="text-danger"><small>{{message}}</small></p>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name" class="col-form-label text-black">Last Name:</label>
+                            <input type="text" class="form-control col-sm-9" name="last_name" id="last_name"
+                                value="Neipp">
+                            {% for message in messages %}
+                            {% if "last_name" in message.extra_tags %}
+                            <p class="text-danger"><small>{{message}}</small></p>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="form-group">
+                            <label for="anonymous">Always review anonymously</label>
+                            <input type="checkbox" name="anonymous" id="anonymous" class="ml-3">
+                        </div>
+                        <input type="submit" value="Update Info" class="btn btn-custom ml-auto">
+                    </form>
+                </div>
+
+                <div class="col-md-4">
+                    <form action="" class="mt-0" method="POST" id="update-password">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="new-password" class="col-form-label text-black">Current Password:</label>
+                            <input type="password" class="form-control col-sm-9" name="current-password" id="password">
+                            {% for message in messages %}
+                            {% if "password" in message.extra_tags %}
+                            <p class="text-danger"><small>{{message}}</small></p>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="form-group">
+                            <label for="new-password" class="col-form-label text-black">New Password:</label>
+                            <input type="password" class="form-control col-sm-9" name="new-password" id="password">
+                            {% for message in messages %}
+                            {% if "password" in message.extra_tags %}
+                            <p class="text-danger"><small>{{message}}</small></p>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_password" class="col-form-label text-black">Confirm Password:</label>
+                            <input type="password" class="form-control col-sm-9" name="confirm_password"
+                                id="confirm_password">
+                            {% for message in messages %}
+                            {% if "confirm" in message.extra_tags %}
+                            <p class="text-danger"><small>{{message}}</small></p>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <input type="submit" value="Change Password" class="btn btn-custom ml-auto">
+                    </form>
+                </div>
+                <hr class="border border-grey w-100">
+            </div>
+            <h3 class="mb-3">Your Reviews</h3>
+            <div class="row">
+                <div class="mx-5">
+                    <h5>Company Name</h5>
+                    <h6 class="font-weight-bold text-danger"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><small
+                            class='ml-2'><em class="text-dark font-weight-bold">06/14/2019</em></small></h6>
+                    <p>Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata
+                        corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead
+                        survivor dictum mauris. Hi mindless mortuis soulless creaturas, imo evil stalking monstra
+                        adventus resi dentevil vultus comedat cerebella viventium. Qui animated corpse.</p>
+                    <u><a href="">Delete review</a></u>
+                </div>
+                <hr class="border border-grey w-100">
+            </div>
+            <div class="row">
+                <div class="mx-5">
+                    <h5>Company Name</h5>
+                    <h6 class="font-weight-bold text-danger"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><small
+                            class='ml-2'><em class="text-dark font-weight-bold">06/14/2019</em></small></h6>
+                    <p>Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata
+                        corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead
+                        survivor dictum mauris. Hi mindless mortuis soulless creaturas, imo evil stalking monstra
+                        adventus resi dentevil vultus comedat cerebella viventium. Qui animated corpse.</p>
+                    <u><a href="">Delete review</a></u>
+                </div>
+                <hr class="border border-grey w-100">
+            </div>
+            <div class="row">
+                <div class="mx-5">
+                    <h5>Company Name</h5>
+                    <h6 class="font-weight-bold text-danger"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><small
+                            class='ml-2'><em class="text-dark font-weight-bold">06/14/2019</em></small></h6>
+                    <p>Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata
+                        corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead
+                        survivor dictum mauris. Hi mindless mortuis soulless creaturas, imo evil stalking monstra
+                        adventus resi dentevil vultus comedat cerebella viventium. Qui animated corpse.</p>
+                    <u><a href="">Delete review</a></u>
+                </div>
+                <hr class="border border-grey w-100">
+            </div>
+        </div>
+
+        <div class="container-fluid d-flex align-items-center justify-content-center flex-wrap mt-4"
+            style="background-color:#2B2D2F; height:125px">
+            <hr class="border border-light w-100 mt-5 mb-0">
+            <small class="text-light mb-3"> &copy; Mason Gates</small>
+        </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+</body>

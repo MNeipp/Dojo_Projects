@@ -10,3 +10,6 @@ def the_list(request):
 
 def company_profile(request):
     return render(request, "company_profile.html")
+
+def user_profile(request):
+    return render(request, "user_profile.html")
