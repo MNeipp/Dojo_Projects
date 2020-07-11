@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang=>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Voca\LIST</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
+    <!-- Google Font embed -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Parisienne&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+        <script src="https://kit.fontawesome.com/0eb52090db.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#efefef">
+            <div class="container-fluid">
+                <a href="{% url 'index' %}"><img src="{% static 'img/vocalist-logo.png' %}" class="navbar-brand"
+                        height=150px width=400px></img></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ml-auto">
+                        <a class="nav-link font-weight-bold" href="#">About</a>
+                        <a class="nav-link font-weight-bold" href="{% url 'list' %}">The List</a>
+                        <a class="nav-link font-weight-bold" href="{% url 'login' %} ">Log In</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid mt-4">
+            <div class="row">
+                <div class="col-md-4 col-sm-12 d-flex flex-column align-items-center">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQNHZ0deozcusaZcFDa93jbnOcaQEmqmCCqwA&usqp=CAU" alt="Company Logo">
+                    <u><a href="http://operasj.org" class="">Company Website</a></u>
+                </div>
+                <div class="col-md-4 col-sm-12 d-flex justify-content-center">
+                    <ul class="list-unstyled">
+                        <li><h5><em>Company Name:</em></h5></li>
+                        <ul class="mb-2 list-unstyled">
+                            <h5><li class="font-weight-bold">Opera San Jose</li></h5>
+                        </ul>
+                        <li><h5><em>Program Type:</em></h5></li>
+                        <ul class="mb-2 list-unstyled">
+                            <h5><li class="font-weight-bold">Year-round Residency</li></h5>
+                        </ul>
+                        <li><h5><em>Compensation:</em></h5></li>
+                        <ul class="mb-2 list-unstyled">
+                            <h5><li class="font-weight-bold">$550/week</li></h5>
+                        </ul>
+                            <h5><li><h5><em>Rating:</em></h5></li></h5>
+                        <ul class="mb-2 list-unstyled">
+                            <h5><li class="font-weight-bold text-danger"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> <i class="fas fa-star-half-alt"></i><small class='ml-2'><em class="text-dark">437 ratings</em></small></li></h5>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="col-md-4 col-sm-12 d-flex flex-column align-items-center ">
+                    <ul class="list-unstyled">
+                        <h5 class="d-block"><em>Perks:</em></h5>
+                       <li><i class="far fa-check-square mr-1"></i>Housing</li>
+                       <li><i class="far fa-check-square mr-1"></i>AGMA</li>
+                       <li><i class="far fa-check-square mr-1"></i>Insurance</li>
+                       <li><i class="far fa-check-square mr-1"></i>Roles</li>
+                       <li><i class="far fa-square mr-1"></i>Voice Lessons</li>
+                   </ul>
+                </div>
+                <div class="row ml-5">
+                    <div class="col-md-6 ml-4">
+                        <p>Opera San José is a professional, regional opera company in San Jose, California. Maintaining a resident company of principal artists, Opera San José specializes in showcasing young professional singers.</p>
+                    </div>
+                </div>
+                <hr class="border border-grey w-100">
+            </div>
+
+        </div>
+
+
+
+        <div class="container-fluid d-flex align-items-center justify-content-center flex-wrap mt-4" style="background-color:#2B2D2F; height:125px">
+            <hr class="border border-light w-100 mt-5 mb-0" >
+            <small class="text-light mb-3"> &copy; Mason Gates</small>
+        </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+</body>

@@ -7,3 +7,6 @@ def index(request):
 
 def the_list(request):
     return render(request, "list.html")
+
+def company_profile(request):
+    return render(request, "company_profile.html")
