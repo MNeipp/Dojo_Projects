@@ -39,5 +39,6 @@ class Review(models.Model):
     rating = models.IntegerField()
     company = models.ForeignKey(Company, related_name = "has_reviews", on_delete=models.CASCADE)
     creator = models.ForeignKey(User, related_name="has_reviewed", on_delete=models.CASCADE)
+    anonymous = models.BooleanField(default = True)
     created_at = models.DateField(auto_now_add = True)
     updated_at = models.DateField(auto_now= True)
