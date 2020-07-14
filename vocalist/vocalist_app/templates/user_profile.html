@@ -30,7 +30,12 @@
                     <div class="navbar-nav ml-auto">
                         <a class="nav-link font-weight-bold" href="#">About</a>
                         <a class="nav-link font-weight-bold" href="{% url 'list' %}">The List</a>
+                        {% if logged_user %}
+                        <a class="nav-link font-weight-bold active disabled" href="{% url 'user_profile' %}">Profile</a>
+                        <a class="nav-link font-weight-bold" href="{% url 'logout' %} ">Log Out</a>
+                        {% else %}
                         <a class="nav-link font-weight-bold" href="{% url 'login' %} ">Log In</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -38,20 +43,21 @@
         <div class="container-fluid mt-4">
             <div class="row d-flex justify-content-between">
                 <div class="col-md-2">
-                    <img src="{% static '/img/profile-image2.jpg' %}" alt="" style="height:175px">
+                    <img src="{{logged_user.image.url}}" alt="" style="width:150px">
+                    <form action="{% url 'update_user_profile' %}" class="mt-0" method="POST" id="update-info" enctype="multipart/form-data">
+                        {% csrf_token %}
                     <div class="form-group mt-3">
-                        <input type="file" name="profile-picture" id="profile-picture" class="form-control-file">
+                        <input type="hidden" name="user_id" value={{logged_user.id}}>
+                        <input type="file" name="profile_picture" id="profile_picture" class="">
                         <small id="fileHelp" class="form-text text-muted">Upload a new profile picture</small>
                     </div>
-                    <p class="font-weight-bold">Reviews: 12</p>
+                    <p class="font-weight-bold">Reviews: {{logged_user.has_reviewed.all.count}}</p>
                 </div>
                 <div class="col-md-4">
-                    <form action="" class="mt-0" method="POST" id="update-info">
-                        {% csrf_token %}
                         <div class="form-group">
                             <label for="email" class="col-form-label text-black">Email:</label>
                             <input type="email" class="form-control col-sm-9" name="email" id="email"
-                                value="mason@email.com">
+                                value="{{logged_user.email}}">
                             {% for message in messages %}
                             {% if "email" in message.extra_tags %}
                             <p class="text-danger"><small>{{message}}</small></p>
@@ -61,7 +67,7 @@
                         <div class="form-group">
                             <label for="first_name" class="col-form-label text-black">First Name:</label>
                             <input type="text" class="form-control col-sm-9" name="first_name" id="first_name"
-                                value="Mason">
+                                value="{{logged_user.first_name}}">
                             {% for message in messages %}
                             {% if "first_name" in message.extra_tags %}
                             <p class="text-danger"><small>{{message}}</small></p>
@@ -71,7 +77,7 @@
                         <div class="form-group">
                             <label for="last_name" class="col-form-label text-black">Last Name:</label>
                             <input type="text" class="form-control col-sm-9" name="last_name" id="last_name"
-                                value="Neipp">
+                                value="{{logged_user.last_name}}">
                             {% for message in messages %}
                             {% if "last_name" in message.extra_tags %}
                             <p class="text-danger"><small>{{message}}</small></p>
@@ -80,18 +86,22 @@
                         </div>
                         <div class="form-group">
                             <label for="anonymous">Always review anonymously</label>
+                            {% if logged_user.anonymous == True%}
+                            <input type="checkbox" name="anonymous" id="anonymous" class="ml-3" checked>
+                            {% else %}
                             <input type="checkbox" name="anonymous" id="anonymous" class="ml-3">
+                            {% endif %}
                         </div>
                         <input type="submit" value="Update Info" class="btn btn-custom ml-auto">
                     </form>
                 </div>
 
                 <div class="col-md-4">
-                    <form action="" class="mt-0" method="POST" id="update-password">
+                    <form action="{% url 'update_password' %}" class="mt-0" method="POST" id="update_password">
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="new-password" class="col-form-label text-black">Current Password:</label>
-                            <input type="password" class="form-control col-sm-9" name="current-password" id="password">
+                            <input type="password" class="form-control col-sm-9" name="current_password" id="password">
                             {% for message in messages %}
                             {% if "password" in message.extra_tags %}
                             <p class="text-danger"><small>{{message}}</small></p>
@@ -100,9 +110,9 @@
                         </div>
                         <div class="form-group">
                             <label for="new-password" class="col-form-label text-black">New Password:</label>
-                            <input type="password" class="form-control col-sm-9" name="new-password" id="password">
+                            <input type="password" class="form-control col-sm-9" name="new_password" id="new_password">
                             {% for message in messages %}
-                            {% if "password" in message.extra_tags %}
+                            {% if "confirm" in message.extra_tags %}
                             <p class="text-danger"><small>{{message}}</small></p>
                             {% endif %}
                             {% endfor %}

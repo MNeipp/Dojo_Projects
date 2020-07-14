@@ -22,9 +22,4 @@ urlpatterns =[
     path('users/show/<int:comment_id>/comment/unlike/', db_views.unlike_comment, name="unlike_comment"),
     path('users/<int:user_id>/post/delete/', db_views.delete_post, name="delete_post"),
     path('users/<int:user_id>/comment/delete/', db_views.delete_comment, name="delete_comment"),
-
-
-
-
-
 ]

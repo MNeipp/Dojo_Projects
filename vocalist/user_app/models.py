@@ -52,7 +52,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
-    image = models.ImageField(default='default.png', upload_to='profile_pics')
+    image = models.ImageField(default='profile_pictures/default.png', upload_to='profile_pictures')
     anonymous = models.BooleanField(default = True)
     created_at = models.DateTimeField(auto_now_add=True)
     edited_at = models.DateTimeField(auto_now=True)
