@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from django.db import models
 import bcrypt, re
+from PIL import Image
 
 # Create your models here.
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
@@ -46,13 +47,13 @@ class userManager(models.Manager):
             errors['confirm'] = "Passwords don't match."
         return errors
 
-
-
 class User(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
+    image = models.ImageField(default='default.png', upload_to='profile_pics')
+    anonymous = models.BooleanField(default = True)
     created_at = models.DateTimeField(auto_now_add=True)
     edited_at = models.DateTimeField(auto_now=True)
     objects = userManager()
