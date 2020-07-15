@@ -26,11 +26,12 @@ def the_list(request):
         return render(request, "list.html", context)
         
 
-def company_profile(request):
+def company_profile(request, slug):
     if 'user_id' not in request.session:
         return render(request, "company_profile.html")
     else:
         context={
+            'company': Company.objects.get(slug=slug),
             'logged_user': User.objects.get(id=request.session['user_id'])
         }
         return render(request, "company_profile.html", context)
