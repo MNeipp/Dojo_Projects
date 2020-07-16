@@ -2,6 +2,7 @@ from django.db import models
 from user_app.models import User
 from django.urls import reverse
 from django.template.defaultfilters import slugify
+from datetime import datetime
 
 
 # Create your models here.
@@ -58,9 +59,9 @@ class Company(models.Model):
     def averageRating(self):
         if self.has_reviews.all():
             num = 0
-            for sum in self.has_reviews.all().rating:
-                num += sum
-            return (round(sum/len(self.has_reviews.all().rating)),2)
+            for review in self.has_reviews.all():
+                num += review.rating
+            return round((num/self.has_reviews.all().count()),1)
         else:
             return "no reviews"
 
@@ -72,3 +73,7 @@ class Review(models.Model):
     anonymous = models.BooleanField(default = True)
     created_at = models.DateField(auto_now_add = True)
     updated_at = models.DateField(auto_now= True)
+
+    def datePosted(self):
+        return datetime.strftime(self.created_at, "%B %d, %Y")
+

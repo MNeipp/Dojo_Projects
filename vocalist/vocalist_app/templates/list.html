@@ -52,12 +52,12 @@
                 <input type="hidden" name="category" value="residency">
                 <input type="submit" class="btn btn-custom col-md-8" value="Resident YAPs">
             </form>
-            <form action="" class='col-sm-12 col-md-3 mb-2'>
+            <form action="{% url 'list' %}" class='col-sm-12 col-md-3 mb-2'>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-search"></i></span>
                     </div>
-                    <input type="search" name="search" id="" class='form-control' placeholder="Company Name">
+                    <input type="search" name="name" id="" class='form-control' placeholder="Company Name">
                 </div>
             </form>
         </div>
@@ -75,7 +75,66 @@
                     {% for company in companies.qs  %}
                     <tr>
                         <td class="font-weight-bold"><u><a href="{% url 'company_profile' company.slug %}">{{company.name}}</a></u></td>
-                        <td class="font-weight-bold">{{company.averageRating}}</td>
+                        <td class="font-weight-bold">                                
+                            {% if company.averageRating == 0 %}
+                            <span class="font-weight-bold text-danger"><i class="fas fa-star-o"></i><i
+                                class="fas fa-star-o"></i><i class="fas fa-star-o"></i> <i
+                                class="fas fa-star-o"></i><i class="fa fa-star-o"></i>
+                            </span>
+
+                            {% elif company.averageRating == 0.5 %}
+                            <span class="font-weight-bold text-danger"><i class="fas fa-star-half-alt"></i><i
+                                class="fas fa-star-o"></i><i class="fas fa-star-o"></i> <i
+                                class="fas fa-star-o"></i><i class="fa fa-star-o"></i>
+                            </span>
+                            {% elif company.averageRating == 1.0 %}
+                            <span class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                                class="fas fa-star-o"></i><i class="fas fa-star-o"></i> <i
+                                class="fas fa-star-o"></i><i class="fa fa-star-o"></i>
+                            </span>
+                            {% elif company.averageRating == 1.5 %}
+                            <span class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                                class="fas fa-star-half-alt"></i><i class="fas fa-star-o"></i> <i
+                                class="fas fa-star-o"></i><i class="fa fa-star-o"></i>
+                            </span>
+                            {% elif company.averageRating == 2.0 %}
+                            <span class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star-o"></i> <i
+                                class="fas fa-star-o"></i><i class="fa fa-star-o"></i>
+                            </span>
+                            {% elif company.averageRating == 2.5 %}
+                            <span class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> <i
+                                class="fas fa-star-o"></i><i class="fa fa-star-o"></i>
+                            </span>
+                            {% elif company.averageRating == 3.0 %}
+                            <span class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star"></i> <i
+                                class="fas fa-star-o"></i><i class="fa fa-star-o"></i>
+                            </span>
+                            {% elif company.averageRating == 3.5 %}
+                            <span class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star"></i> <i
+                                class="fas fa-star-half-alt"></i><i class="fa fa-star-o"></i>
+                            </span>
+                            {% elif company.averageRating == 4.0 %}
+                            <span class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star"></i> <i
+                                class="fas fa-star"></i><i class="fa fa-star-o"></i>
+                            </span>
+                            {% elif company.averageRating == 4.5 %}
+                            <span class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star"></i> <i
+                                class="fas fa-star"></i><i class="fa fa-star-half-alt"></i>
+                            </span>
+                            {% elif company.averageRating == 5.0 %}
+                            <span class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star"></i> <i
+                                class="fas fa-star"></i><i class="fa fa-star"></i>
+                            </span>
+                            {% else %}
+                            {{company.averageRating}}
+                            {% endif %}</td>
                         <td class="font-weight-bold">{{company.category}}</td>
                         <td class="font-weight-bold">${{company.weekly_stipend}} / week</td>
                     </tr>

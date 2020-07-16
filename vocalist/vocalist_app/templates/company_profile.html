@@ -92,11 +92,74 @@
                         </h5>
                         <ul class="mb-2 list-unstyled">
                             <h5>
-                                {{company.averageRating}}
+                                {% if company.averageRating == 0 %}
+                                <li class="font-weight-bold text-danger"><i class="fas fa-star-o"></i><i
+                                    class="fas fa-star-o"></i><i class="fas fa-star-o"></i> <i
+                                    class="fas fa-star-o"></i><i class="fa fa-star-o"></i><small
+                                    class='ml-2'><em class="text-dark">{{company.has_reviews.all.count}} reviews</em></small>
+                                </li>
+
+                                {% elif company.averageRating == 0.5 %}
+                                <li class="font-weight-bold text-danger"><i class="fas fa-star-half-alt"></i><i
+                                    class="fas fa-star-o"></i><i class="fas fa-star-o"></i> <i
+                                    class="fas fa-star-o"></i><i class="fa fa-star-o"></i><small
+                                    class='ml-2'><em class="text-dark">{{company.has_reviews.all.count}} reviews</em></small>
+                                </li>
+                                {% elif company.averageRating == 1.0 %}
                                 <li class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i><i class="fas fa-star"></i> <i
-                                        class="fas fa-star-half-alt"></i><i class="fa fa-star-o"></i><small
-                                        class='ml-2'><em class="text-dark">437 ratings</em></small></li>
+                                    class="fas fa-star-o"></i><i class="fas fa-star-o"></i> <i
+                                    class="fas fa-star-o"></i><i class="fa fa-star-o"></i><small
+                                    class='ml-2'><em class="text-dark">{{company.has_reviews.all.count}} reviews</em></small>
+                                </li>
+                                {% elif company.averageRating == 1.5 %}
+                                <li class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                                    class="fas fa-star-half-alt"></i><i class="fas fa-star-o"></i> <i
+                                    class="fas fa-star-o"></i><i class="fa fa-star-o"></i><small
+                                    class='ml-2'><em class="text-dark">{{company.has_reviews.all.count}} reviews</em></small>
+                                </li>
+                                {% elif company.averageRating == 2.0 %}
+                                <li class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star-o"></i> <i
+                                    class="fas fa-star-o"></i><i class="fa fa-star-o"></i><small
+                                    class='ml-2'><em class="text-dark">{{company.has_reviews.all.count}} reviews</em></small>
+                                </li>
+                                {% elif company.averageRating == 2.5 %}
+                                <li class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> <i
+                                    class="fas fa-star-o"></i><i class="fa fa-star-o"></i><small
+                                    class='ml-2'><em class="text-dark">{{company.has_reviews.all.count}} reviews</em></small>
+                                </li>
+                                {% elif company.averageRating == 3.0 %}
+                                <li class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i> <i
+                                    class="fas fa-star-o"></i><i class="fa fa-star-o"></i><small
+                                    class='ml-2'><em class="text-dark">{{company.has_reviews.all.count}} reviews</em></small>
+                                </li>
+                                {% elif company.averageRating == 3.5 %}
+                                <li class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i> <i
+                                    class="fas fa-star-half-alt"></i><i class="fa fa-star-o"></i><small
+                                    class='ml-2'><em class="text-dark">{{company.has_reviews.all.count}} reviews</em></small>
+                                </li>
+                                {% elif company.averageRating == 4.0 %}
+                                <li class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i> <i
+                                    class="fas fa-star"></i><i class="fa fa-star-o"></i><small
+                                    class='ml-2'><em class="text-dark">{{company.has_reviews.all.count}} reviews</em></small>
+                                </li>
+                                {% elif company.averageRating == 4.5 %}
+                                <li class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i> <i
+                                    class="fas fa-star"></i><i class="fa fa-star-half-alt"></i><small
+                                    class='ml-2'><em class="text-dark">{{company.has_reviews.all.count}} reviews</em></small>
+                                </li>
+                                {% elif company.averageRating == 5.0 %}
+                                <li class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i> <i
+                                    class="fas fa-star"></i><i class="fa fa-star"></i><small
+                                    class='ml-2'><em class="text-dark">{{company.has_reviews.all.count}} reviews</em></small>
+                                </li>
+                                {% endif %}
                             </h5>
                         </ul>
                     </ul>
@@ -133,39 +196,39 @@
                 </div>
                 <hr class="border border-grey w-100">
             </div>
-            <div class="row d-flex align-items-center">
+            {% for review in company.has_reviews.all reversed %}
+            <div class="row d-flex">
                 <div class="col-md-2">
+                    {% if review.anonymous == True %}
                     <img src="{% static 'img/default.png' %}" alt="" style="height:120px">
                     <p class="ml-3">Anonymous</p>
+                    {% else %}
+                    <img src="{{review.creator.image.url}}" alt="" style="height:120px">
+                    <p class="ml-3">{{review.creator.first_name}} {{review.creator.last_name}}</p>
+                    {% endif %}
                 </div>
                 <div class="col-md-10">
-                    <h6 class="font-weight-bold text-danger"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><small
-                            class='ml-2'><em class="text-dark font-weight-bold">07/20/2018</em></small></h6>
-                    <p>Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata
-                        corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead
-                        survivor dictum mauris. Hi mindless mortuis soulless creaturas, imo evil stalking monstra
-                        adventus resi dentevil vultus comedat cerebella viventium. Qui animated corpse.</p>
+                    
+                    <h6 class="font-weight-bold text-danger">
+                        {% if review.rating == 1 %}
+                        <i class="fas fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                        {% elif review.rating == 2 %}
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                        {% elif review.rating == 3 %}
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                        {% elif review.rating == 4 %}
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                        {% elif review.rating == 5 %}
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+                        {% endif %}
+                        <small class='ml-2'><em class="text-dark font-weight-bold">{{review.datePosted}}</em></small></h6>
+                    <p>{{review.content}}</p>
                 </div>
                 <hr class="border border-grey w-100">
             </div>
-            <div class="row d-flex align-items-center">
-                <div class="col-md-2">
-                    <img src="{% static 'img/profile-image2.jpg' %}" alt="" style="height:120px">
-                    <p class="ml-3">Mason Gates</p>
-                </div>
-                <div class="col-md-10">
-                    <h6 class="font-weight-bold text-danger"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><small
-                            class='ml-2'><em class="text-dark font-weight-bold">06/14/2019</em></small></h6>
-                    <p>Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata
-                        corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead
-                        survivor dictum mauris. Hi mindless mortuis soulless creaturas, imo evil stalking monstra
-                        adventus resi dentevil vultus comedat cerebella viventium. Qui animated corpse.</p>
-                </div>
-                <hr class="border border-grey w-100">
-            </div>
-            <form action="" class="" id="review-form">
+            {% endfor %}
+            <form action="{% url 'leave_review' company.slug %}" class="" id="review-form" method=POST>
+                {% csrf_token %}
                 <div class="row">
                     <div class="col-md-2 d-flex flex-column justify-content-between">
                         <div class="form-check form-check-inline ml-1">
@@ -191,7 +254,6 @@
                         </div>
                     </div>
                     <div class="col-md-10">
-
                         <textarea name="content" id="" rows="5" placeholder="Review this company (optional)"
                             style="resize: none;" class="w-100"></textarea>
                     </div>
