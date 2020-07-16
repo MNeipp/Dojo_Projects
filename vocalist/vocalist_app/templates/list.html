@@ -41,9 +41,19 @@
             </div>
         </nav>
         <div class="container-fluid d-flex row justify-content-around mt-5 ml-3">
-            <a href="" class="btn btn-custom col-11 col-md-2 mb-2">All YAPs</a>
-            <a href="" class="btn btn-custom col-11 col-md-2 mb-2">Summer YAPs</a>
-            <a href="" class="btn btn-custom col-11 col-md-2 mb-2">Year-round YAPs</a>
+            <form action="{% url 'list' %}" class="col-md-3">
+                <input type="submit" class="btn btn-custom col-md-8" value="All YAPs">
+            </form>
+            <form action="{% url 'list' %}" method="POST" class="col-md-3">
+                {% csrf_token %}
+                <input type="hidden" name="filter_query" value="summer">
+                <input type="submit" class="btn btn-custom col-md-8" value="Summer YAPs">
+            </form>
+            <form action="{% url 'list' %}" method="POST" class="col-md-3">
+                {% csrf_token %}
+                <input type="hidden" name="filter_query" value="residency">
+                <input type="submit" class="btn btn-custom col-md-8" value="Resident YAPs">
+            </form>
             <form action="" class='col-sm-12 col-md-3 mb-2'>
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -58,41 +68,18 @@
                 <thead>
                     <tr>
                         <th>Company</th>
-                        <th>Location</th>
-                        <th>Type</th>
+                        <th>Category</th>
+                        <th>Stipend</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {% for company in companies  %}
                     <tr>
-                        <td class="font-weight-bold"><u><a href="">Opera San Jose</a></u></td>
-                        <td class="font-weight-bold">San Jose, CA</td>
-                        <td class="font-weight-bold">Year-round</td>
+                        <td class="font-weight-bold"><u><a href="{% url 'company_profile' company.slug %}">{{company.name}}</a></u></td>
+                        <td class="font-weight-bold">{{company.category}}</td>
+                        <td class="font-weight-bold">${{company.weekly_stipend}} / week</td>
                     </tr>
-                    <tr>
-                        <td class="font-weight-bold"><u><a href="">Opera San Jose</a></u></td>
-                        <td class="font-weight-bold">San Jose, CA</td>
-                        <td class="font-weight-bold">Year-round</td>
-                    </tr>
-                    <tr>
-                        <td class="font-weight-bold"><u><a href="">Opera San Jose</a></u></td>
-                        <td class="font-weight-bold">San Jose, CA</td>
-                        <td class="font-weight-bold">Year-round</td>
-                    </tr>
-                    <tr>
-                        <td class="font-weight-bold"><u><a href="">Opera San Jose</a></u></td>
-                        <td class="font-weight-bold">San Jose, CA</td>
-                        <td class="font-weight-bold">Year-round</td>
-                    </tr>
-                    <tr>
-                        <td class="font-weight-bold"><u><a href="">Opera San Jose</a></u></td>
-                        <td class="font-weight-bold">San Jose, CA</td>
-                        <td class="font-weight-bold">Year-round</td>
-                    </tr>
-                    <tr>
-                        <td class="font-weight-bold"><u><a href="">Opera San Jose</a></u></td>
-                        <td class="font-weight-bold">San Jose, CA</td>
-                        <td class="font-weight-bold">Year-round</td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

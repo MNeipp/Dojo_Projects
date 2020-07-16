@@ -17,15 +17,13 @@ def index(request):
         return render(request, "index.html", context)
 
 def the_list(request):
-    if 'user_id' not in request.session:
-        return render(request, "list.html")
-    else:
-        context={
-            'logged_user': User.objects.get(id=request.session['user_id'])
-        }
-        return render(request, "list.html", context)
-        
 
+    context={
+        'companies': Company.objects.all().summer,
+        'logged_user': User.objects.get(id=request.session['user_id'])
+    }
+    return render(request, "list.html", context)
+        
 def company_profile(request, slug):
     if 'user_id' not in request.session:
         return render(request, "company_profile.html")
