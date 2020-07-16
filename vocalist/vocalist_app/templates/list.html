@@ -44,14 +44,12 @@
             <form action="{% url 'list' %}" class="col-md-3">
                 <input type="submit" class="btn btn-custom col-md-8" value="All YAPs">
             </form>
-            <form action="{% url 'list' %}" method="POST" class="col-md-3">
-                {% csrf_token %}
-                <input type="hidden" name="filter_query" value="summer">
+            <form action="{% url 'list' %}" method="GET" class="col-md-3">
+                <input type="hidden" name="category" value="summer">
                 <input type="submit" class="btn btn-custom col-md-8" value="Summer YAPs">
             </form>
-            <form action="{% url 'list' %}" method="POST" class="col-md-3">
-                {% csrf_token %}
-                <input type="hidden" name="filter_query" value="residency">
+            <form action="{% url 'list' %}" method="GET" class="col-md-3">
+                <input type="hidden" name="category" value="residency">
                 <input type="submit" class="btn btn-custom col-md-8" value="Resident YAPs">
             </form>
             <form action="" class='col-sm-12 col-md-3 mb-2'>
@@ -68,14 +66,16 @@
                 <thead>
                     <tr>
                         <th>Company</th>
+                        <th>Rating</th>
                         <th>Category</th>
                         <th>Stipend</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for company in companies  %}
+                    {% for company in companies.qs  %}
                     <tr>
                         <td class="font-weight-bold"><u><a href="{% url 'company_profile' company.slug %}">{{company.name}}</a></u></td>
+                        <td class="font-weight-bold">{{company.averageRating}}</td>
                         <td class="font-weight-bold">{{company.category}}</td>
                         <td class="font-weight-bold">${{company.weekly_stipend}} / week</td>
                     </tr>

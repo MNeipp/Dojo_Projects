@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse, reverse
 from user_app.models import User
 from .models import Company, Review
+from .filters import CompanyFilter
 from django.contrib import messages
 import bcrypt
 
@@ -16,13 +17,15 @@ def index(request):
         }
         return render(request, "index.html", context)
 
-def the_list(request):
 
+def the_list(request):
+    company_list = Company.objects.all()
     context={
-        'companies': Company.objects.all().summer,
+        'companies': CompanyFilter(request.GET, queryset=company_list),
         'logged_user': User.objects.get(id=request.session['user_id'])
     }
     return render(request, "list.html", context)
+
         
 def company_profile(request, slug):
     if 'user_id' not in request.session:

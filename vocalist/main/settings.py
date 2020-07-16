@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'vocalist_app',
     'user_app',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
