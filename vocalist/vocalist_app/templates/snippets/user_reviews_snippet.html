@@ -1,0 +1,32 @@
+{% for review in logged_user.has_reviewed.all %}
+            <div class="row ml-3">
+                <div class="mx-5">
+                    <h5><a href="{% url 'company_profile' review.company.slug %}">{{review.company}}</a></h5>
+                    <h6 class="font-weight-bold text-danger">
+                        {% if review.rating == 1 %}
+                        <i class="fas fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                        {% elif review.rating == 2 %}
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                        {% elif review.rating == 3 %}
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                        {% elif review.rating == 4 %}
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                        {% elif review.rating == 5 %}
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+                        {% endif %}
+                            <small><em class="text-dark font-weight-bold">{{review.datePosted}}</em></small>
+                        </h6>
+                    <p>{{review.content}}</p>
+                    <form action="{% url 'delete_review' review.id %}" method="POST" class="d-flex justify-content-start">
+                        {% csrf_token %}
+                        <u><input type="submit" value="Delete" class="btn btn-link"></u>
+                        <span class="text-info align-self-center">|</span>
+                        <u><input type="submit" value="Edit" class="btn btn-link" form="edit_review"></u>
+                    </form>
+                    <form action="{% url 'edit_review' review.id %}" method="POST" id="edit_review">
+                        {% csrf_token %}
+                    </form>
+                </div>
+                <hr class="border border-grey w-100">
+            </div>
+            {% endfor %}

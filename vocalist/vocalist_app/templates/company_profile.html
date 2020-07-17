@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="col-md-4 col-sm-12 d-flex flex-column align-items-center">
                     <img src="{{company.logo}}" alt="Company Logo" style="width:300px">
-                    <u><a href="{{company.website}}" class="">Company Website</a></u>
+                    <em class="my-2"><a href="{{company.website}}" class="font-weight-bold">Company Website</a></em>
                 </div>
                 <div class="col-md-4 col-sm-12 d-flex justify-content-center">
                     <ul class="list-unstyled">
@@ -299,8 +299,8 @@
                 </div>
                 {% endfor %}
             </div>
-
-            <form action="{% url 'ajax_review' company.slug %}" class="" id="review-form" method=POST>
+            {% if logged_user %}
+            <form action="{% url 'create_review' company.slug %}" class="" id="review-form" method=POST>
                 {% csrf_token %}
                 <div class="row">
                     <div class="col-md-2 d-flex flex-column justify-content-between">
@@ -338,6 +338,12 @@
                     <hr class="border border-grey w-100">
                 </div>
             </form>
+            {% else %}
+            <div class="row d-flex justify-content-center">
+                    <h4 class="">Log in to leave a review!</h4>
+                    <hr class="border border-grey w-100">
+                </div>
+            {% endif %}
         </div>
 
         <div class="container-fluid d-flex align-items-center justify-content-center flex-wrap mt-4"
@@ -357,29 +363,30 @@
     </script>
 
     <script>
-        $('.star').click(function (e) {
-            var temp1 = $(this).attr('class')
-            var temp2 = $(this).attr('class2')
-            $(this).attr('class', temp2)
-            $(this).attr('class2', temp1)
-            $(this).prevAll('.star').attr('class', temp2)
-            $(this).prevAll('.star').attr('class2', temp1)
+        $('.star').hover(function (e) {
+            var unchecked = 'fa fa-star-o text-danger'
+            var checked = 'fa fa-star star text-danger'
+            $(this).attr('class', checked)
+            $(this).attr('class2', unchecked)
+            $(this).prevAll(this).attr('class', checked)
+            $(this).prevAll(this).attr('class2', unchecked)
+            if($(this).next(this).attr('class') == checked){
+                $(this).nextAll(this).attr('class', unchecked)
+            }
             $(this).prev().prop("checked", true)
         })
 
-        $('#review-form').submit(function (e) {
-            e.preventDefault()
-            var form_url = $(this).attr('action')
-            console.log(form_url)
-            $.ajax({
-                method: 'POST',
-                url: form_url,
-                data: $(this).serialize(),
-                success: function (serverResponse) {
-                    $("#reviews").append(serverResponse)
-                }
-            })
-            $(this).trigger('reset')
+        $('.star').click(function (e) {
+            var unchecked = 'fa fa-star-o text-danger'
+            var checked = 'fa fa-star star text-danger'
+            $(this).attr('class', checked)
+            $(this).attr('class2', unchecked)
+            $(this).prevAll(this).attr('class', checked)
+            $(this).prevAll(this).attr('class2', unchecked)
+            if($(this).next(this).attr('class') == checked){
+                $(this).nextAll(this).attr('class', unchecked)
+            }
+            $(this).prev().prop("checked", true)
         })
     </script>
 </body>
