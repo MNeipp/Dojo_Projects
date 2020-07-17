@@ -55,13 +55,25 @@ def delete_review(request, review_id):
     if request.method == "POST":
         to_delete = Review.objects.get(id=review_id)
         to_delete.delete()
-    context={
+        context={
         "logged_user":User.objects.get(id=request.session['user_id'])
-    }
-    return render (request, "snippets/user_reviews_snippet.html", context)
+        }
+        return render (request, "snippets/user_reviews_snippet.html", context)
+    else:
+        return redirect(reverse('index'))
 
 def edit_review(request, review_id):
-    pass
+    if request.method == "POST":
+        to_edit = Review.objects.get(id=review_id)
+        to_edit.rating = request.POST['rating']
+        to_edit.content = request.POST['content']
+        to_edit.save()
+        context={
+            "logged_user":User.objects.get(id=request.session['user_id'])
+        }
+        return render (request, "snippets/user_reviews_snippet.html", context)
+    else:
+        return redirect(reverse('index'))
 
  
 

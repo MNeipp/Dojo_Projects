@@ -76,4 +76,7 @@ class Review(models.Model):
 
     def datePosted(self):
         return datetime.strftime(self.created_at, "%B %d, %Y")
+    
+    def dateEdited(self):
+        return datetime.strftime(self.updated_at, "%B %d, %Y")
 

@@ -292,8 +292,11 @@
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                                 class="fa fa-star"></i><i class="fa fa-star"></i>
                             {% endif %}
-                            <small class='ml-2'><em
-                                    class="text-dark font-weight-bold">{{review.datePosted}}</em></small>
+                            {% if review.updated_at %}
+                            <small><em class="text-dark font-weight-bold">edited {{review.dateEdited}}</em></small>
+                             {% else %}
+                            <small><em class="text-dark font-weight-bold">{{review.datePosted}}</em></small>
+                            {% endif %}
                         </h6>
                         <p>{{review.content}}</p>
                     </div>
@@ -307,6 +310,7 @@
                 <div class="row">
                     <div class="col-md-2 d-flex flex-column justify-content-between">
                         <div class="form-check form-check-inline ml-5">
+                            <input type="radio" name="rating" value=1 class="form-check-input" style="display:none" checked>
                             <input type="radio" name="rating" value=1 class="form-check-input" style="display:none">
                             <i class="fa fa-star-o star text-danger"></i>
                             <input type="radio" name="rating" value=2 class="form-check-input" style="display:none">
