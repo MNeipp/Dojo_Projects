@@ -105,9 +105,10 @@
                                 </li>
 
                                 {% elif company.averageRating > 0 and company.averageRating < 1 %}
-                                <li class="font-weight-bold text-danger" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-star-half-alt"></i><i
+                                <li class="font-weight-bold text-danger" data-toggle="tooltip" data-placement="bottom">
+                                    <i class="fa fa-star-half-alt"></i><i class="fas fa-star-o"></i><i
                                         class="fas fa-star-o"></i><i class="fas fa-star-o"></i><i
-                                        class="fas fa-star-o"></i><i class="fa fa-star-o"></i><small class='ml-2'><em
+                                        class="fa fa-star-o"></i><small class='ml-2'><em
                                             class="text-dark">{{company.has_reviews.all.count}}
                                             {% if company.has_reviews.all.count == 1 %}
                                             review
@@ -166,7 +167,7 @@
                                 </li>
                                 {% elif company.averageRating >= 3.0 and company.averageRating < 3.5 %}
                                 <li class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
-                                        class="fas fa-star" ></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i><i
                                         class="fa fa-star-o"></i><i class="fa fa-star-o"></i><small class='ml-2'><em
                                             class="text-dark">{{company.has_reviews.all.count}}
                                             {% if company.has_reviews.all.count == 1 %}
@@ -274,16 +275,16 @@
                         {% endif %}
                     </div>
                     <div class="col-md-10">
-                        <h6 class="font-weight-bold text-danger">            
+                        <h6 class="font-weight-bold text-danger">
                             {% if review.rating == 1 %}
                             <i class="fas fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i
-                            class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                                class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
                             {% elif review.rating == 2 %}
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fa fa-star-o"></i><i
-                            class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                                class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
                             {% elif review.rating == 3 %}
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                                class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
                             {% elif review.rating == 4 %}
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                                 class="fa fa-star"></i><i class="fa fa-star-o"></i>
@@ -291,7 +292,8 @@
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                                 class="fa fa-star"></i><i class="fa fa-star"></i>
                             {% endif %}
-                            <small class='ml-2'><em class="text-dark font-weight-bold">{{review.datePosted}}</em></small>
+                            <small class='ml-2'><em
+                                    class="text-dark font-weight-bold">{{review.datePosted}}</em></small>
                         </h6>
                         <p>{{review.content}}</p>
                     </div>
@@ -306,20 +308,15 @@
                     <div class="col-md-2 d-flex flex-column justify-content-between">
                         <div class="form-check form-check-inline ml-5">
                             <input type="radio" name="rating" value=1 class="form-check-input" style="display:none">
-                            <i class="fa fa-star-o star text-danger" class2="fa fa-star star text-danger"
-                                click="fa fa-star star text-danger"></i>
+                            <i class="fa fa-star-o star text-danger"></i>
                             <input type="radio" name="rating" value=2 class="form-check-input" style="display:none">
-                            <i class="fa fa-star-o star text-danger" class2="fa fa-star star text-danger"
-                                click="fa fa-star star text-danger"></i>
+                            <i class="fa fa-star-o star text-danger"></i>
                             <input type="radio" name="rating" value=3 class="form-check-input" style="display:none">
-                            <i class="fa fa-star-o star text-danger" class2="fa fa-star star text-danger"
-                                click="fa fa-star star text-danger"></i>
+                            <i class="fa fa-star-o star text-danger"></i>
                             <input type="radio" name="rating" value=4 class="form-check-input" style="display:none">
-                            <i class="fa fa-star-o star text-danger" class2="fa fa-star star text-danger"
-                                click="fa fa-star star text-danger"></i>
+                            <i class="fa fa-star-o star text-danger"></i>
                             <input type="radio" name="rating" value=5 class="form-check-input" style="display:none">
-                            <i class="fa fa-star-o star text-danger" class2="fa fa-star star text-danger"
-                                click="fa fa-star star text-danger"></i>
+                            <i class="fa fa-star-o star text-danger"></i>
                         </div>
                         <input type="submit" value="Submit Review" class="btn btn-custom" form="review-form">
                         <div class="form-group">
@@ -340,9 +337,9 @@
             </form>
             {% else %}
             <div class="row d-flex justify-content-center">
-                    <h4 class="">Log in to leave a review!</h4>
-                    <hr class="border border-grey w-100">
-                </div>
+                <h4 class="">Log in to leave a review!</h4>
+                <hr class="border border-grey w-100">
+            </div>
             {% endif %}
         </div>
 
@@ -363,27 +360,23 @@
     </script>
 
     <script>
-        $('.star').hover(function (e) {
-            var unchecked = 'fa fa-star-o text-danger'
-            var checked = 'fa fa-star star text-danger'
-            $(this).attr('class', checked)
-            $(this).attr('class2', unchecked)
-            $(this).prevAll(this).attr('class', checked)
-            $(this).prevAll(this).attr('class2', unchecked)
-            if($(this).next(this).attr('class') == checked){
-                $(this).nextAll(this).attr('class', unchecked)
-            }
-            $(this).prev().prop("checked", true)
-        })
+        // $('.star').hover(function (e) {
+        //     var unchecked = 'fa fa-star-o text-danger star'
+        //     var checked = 'fa fa-star star text-danger'
+        //     $(this).attr('class', checked);
+        //     $(this).prevAll(this).attr('class', checked)
+        //     if ($(this).next(this).attr('class') == checked) {
+        //         $(this).nextAll(this).attr('class', unchecked)
+        //     }
+        //     $(this).prev().prop("checked", true)
+        // })
 
         $('.star').click(function (e) {
-            var unchecked = 'fa fa-star-o text-danger'
+            var unchecked = 'fa fa-star-o text-danger star'
             var checked = 'fa fa-star star text-danger'
-            $(this).attr('class', checked)
-            $(this).attr('class2', unchecked)
+            $(this).attr('class', checked);
             $(this).prevAll(this).attr('class', checked)
-            $(this).prevAll(this).attr('class2', unchecked)
-            if($(this).next(this).attr('class') == checked){
+            if ($(this).next(this).attr('class') == checked) {
                 $(this).nextAll(this).attr('class', unchecked)
             }
             $(this).prev().prop("checked", true)

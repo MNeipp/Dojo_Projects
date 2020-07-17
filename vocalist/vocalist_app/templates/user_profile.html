@@ -153,13 +153,13 @@
                             <small><em class="text-dark font-weight-bold">{{review.datePosted}}</em></small>
                         </h6>
                     <p>{{review.content}}</p>
-                    <form action="{% url 'delete_review' review.id %}" method="POST" class="d-flex justify-content-start" id="delete_review_form">
+                    <form action="{% url 'delete_review' review.id %}" method="POST" class="d-flex justify-content-start">
                         {% csrf_token %}
                         <u><input type="submit" value="Delete" class="btn btn-link"></u>
                         <span class="text-info align-self-center">|</span>
-                        <u><input type="submit" value="Edit" class="btn btn-link" form="edit_review"></u>
+                        <u><input type="submit" value="Edit" class="btn btn-link" form="edit_review_{{review.id}}"></u>
                     </form>
-                    <form action="{% url 'edit_review' review.id %}" method="POST" id="edit_review">
+                    <form action="{% url 'edit_review' review.id %}" method="POST" id="edit_review_{{review.id}}">
                         {% csrf_token %}
                     </form>
                 </div>
@@ -187,9 +187,9 @@
     </script>
 
     <script>
-        $('#user_reviews').on('submit', '', function(e){
+        $('#user_reviews').on('submit', 'form', function(e){
             e.preventDefault()
-            var form_url = $('#delete_review_form').attr('action')
+            var form_url = $(this).attr('action')
             console.log(form_url)
             $.ajax({
                 method: 'POST',
