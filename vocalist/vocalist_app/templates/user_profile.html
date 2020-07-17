@@ -133,48 +133,38 @@
                 <hr class="border border-grey w-100">
             </div>
             <h3 class="mb-3 ml-2">Your Reviews</h3>
+            {% for review in logged_user.has_reviewed.all %}
             <div class="row ml-3">
                 <div class="mx-5">
-                    <h5>Company Name</h5>
-                    <h6 class="font-weight-bold text-danger"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><small
-                            class='ml-2'><em class="text-dark font-weight-bold">06/14/2019</em></small></h6>
-                    <p>Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata
-                        corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead
-                        survivor dictum mauris. Hi mindless mortuis soulless creaturas, imo evil stalking monstra
-                        adventus resi dentevil vultus comedat cerebella viventium. Qui animated corpse.</p>
-                    <u><a href="">Delete review</a></u>
+                    <h5><a href="{% url 'company_profile' review.company.slug %}">{{review.company}}</a></h5>
+                    <h6 class="font-weight-bold text-danger">
+                        {% if review.rating == 1 %}
+                        <i class="fas fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                        {% elif review.rating == 2 %}
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                        {% elif review.rating == 3 %}
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                        {% elif review.rating == 4 %}
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                        {% elif review.rating == 5 %}
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+                        {% endif %}
+                            <small><em class="text-dark font-weight-bold">{{review.datePosted}}</em></small>
+                        </h6>
+                    <p>{{review.content}}</p>
+                    <form action="{% url 'delete_review' review.id %}" method="POST" class="d-flex justify-content-start">
+                        {% csrf_token %}
+                        <u><input type="submit" value="Delete" class="btn btn-link"></u>
+                        <span class="text-info align-self-center">|</span>
+                        <u><input type="submit" value="Edit" class="btn btn-link" form="edit_review"></u>
+                    </form>
+                    <form action="{% url 'edit_review' review.id %}" method="POST" id="edit_review">
+                        {% csrf_token %}
+                    </form>
                 </div>
                 <hr class="border border-grey w-100">
             </div>
-            <div class="row ml-3">
-                <div class="mx-5">
-                    <h5>Company Name</h5>
-                    <h6 class="font-weight-bold text-danger"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><small
-                            class='ml-2'><em class="text-dark font-weight-bold">06/14/2019</em></small></h6>
-                    <p>Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata
-                        corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead
-                        survivor dictum mauris. Hi mindless mortuis soulless creaturas, imo evil stalking monstra
-                        adventus resi dentevil vultus comedat cerebella viventium. Qui animated corpse.</p>
-                    <u><a href="">Delete review</a></u>
-                </div>
-                <hr class="border border-grey w-100">
-            </div>
-            <div class="row ml-3">
-                <div class="mx-5">
-                    <h5>Company Name</h5>
-                    <h6 class="font-weight-bold text-danger"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><small
-                            class='ml-2'><em class="text-dark font-weight-bold">06/14/2019</em></small></h6>
-                    <p>Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata
-                        corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead
-                        survivor dictum mauris. Hi mindless mortuis soulless creaturas, imo evil stalking monstra
-                        adventus resi dentevil vultus comedat cerebella viventium. Qui animated corpse.</p>
-                    <u><a href="">Edit | Delete</a></u>
-                </div>
-                <hr class="border border-grey w-100">
-            </div>
+            {% endfor %}
         </div>
 
         <div class="container-fluid d-flex align-items-center justify-content-center flex-wrap mt-4"
