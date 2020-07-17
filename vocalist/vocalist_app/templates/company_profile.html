@@ -105,7 +105,7 @@
                                 </li>
 
                                 {% elif company.averageRating > 0 and company.averageRating < 1 %}
-                                <li class="font-weight-bold text-danger"><i class="fa fa-star-half-alt"></i><i
+                                <li class="font-weight-bold text-danger" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-star-half-alt"></i><i
                                         class="fas fa-star-o"></i><i class="fas fa-star-o"></i><i
                                         class="fas fa-star-o"></i><i class="fa fa-star-o"></i><small class='ml-2'><em
                                             class="text-dark">{{company.has_reviews.all.count}}
@@ -166,7 +166,7 @@
                                 </li>
                                 {% elif company.averageRating >= 3.0 and company.averageRating < 3.5 %}
                                 <li class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i><i class="fas fa-star"></i> <i
+                                        class="fas fa-star" ></i><i class="fas fa-star"></i><i
                                         class="fa fa-star-o"></i><i class="fa fa-star-o"></i><small class='ml-2'><em
                                             class="text-dark">{{company.has_reviews.all.count}}
                                             {% if company.has_reviews.all.count == 1 %}
@@ -261,43 +261,45 @@
                 </div>
                 <hr class="border border-grey w-100">
             </div>
-            {% for review in company.has_reviews.all reversed %}
-            <div class="row d-flex" id="reviews">
-                <div class="col-md-2 d-flex flex-column align-items-center">
-                    {% if review.anonymous == True %}
-                    <img src="{% static 'img/default.png' %}" alt="" style="height:120px">
-                    <p class="">Anonymous</p>
-                    {% else %}
-                    <img src="{{review.creator.image.url}}" alt="" style="height:120px">
-                    <p class="">{{review.creator.first_name}} {{review.creator.last_name}}</p>
-                    {% endif %}
-                </div>
-                <div class="col-md-10">
-                    <h6 class="font-weight-bold text-danger">
-                        
-                        {% if review.rating == 1 %}
-                        <i class="fas fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i
-                            class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
-                        {% elif review.rating == 2 %}
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fa fa-star-o"></i><i
-                            class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
-                        {% elif review.rating == 3 %}
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
-                        {% elif review.rating == 4 %}
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                        {% elif review.rating == 5 %}
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fa fa-star"></i><i class="fa fa-star"></i>
+            <div id="reviews">
+                {% for review in company.has_reviews.all reversed %}
+                <div class="row d-flex">
+                    <div class="col-md-2 d-flex flex-column align-items-center">
+                        {% if review.anonymous == True %}
+                        <img src="{% static 'img/default.png' %}" alt="" style="height:120px">
+                        <p class="">Anonymous</p>
+                        {% else %}
+                        <img src="{{review.creator.image.url}}" alt="" style="height:120px">
+                        <p class="">{{review.creator.first_name}} {{review.creator.last_name}}</p>
                         {% endif %}
-                        <small class='ml-2'><em class="text-dark font-weight-bold">{{review.datePosted}}</em></small>
-                    </h6>
-                    <p>{{review.content}}</p>
+                    </div>
+                    <div class="col-md-10">
+                        <h6 class="font-weight-bold text-danger">            
+                            {% if review.rating == 1 %}
+                            <i class="fas fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i
+                            class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                            {% elif review.rating == 2 %}
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fa fa-star-o"></i><i
+                            class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                            {% elif review.rating == 3 %}
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                            {% elif review.rating == 4 %}
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                            {% elif review.rating == 5 %}
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                class="fa fa-star"></i><i class="fa fa-star"></i>
+                            {% endif %}
+                            <small class='ml-2'><em class="text-dark font-weight-bold">{{review.datePosted}}</em></small>
+                        </h6>
+                        <p>{{review.content}}</p>
+                    </div>
+                    <hr class="border border-grey w-100">
                 </div>
-                <hr class="border border-grey w-100">
+                {% endfor %}
             </div>
-            {% endfor %}
+
             <form action="{% url 'ajax_review' company.slug %}" class="" id="review-form" method=POST>
                 {% csrf_token %}
                 <div class="row">
@@ -374,7 +376,7 @@
                 url: form_url,
                 data: $(this).serialize(),
                 success: function (serverResponse) {
-                    $("#reviews").prepend(serverResponse)
+                    $("#reviews").append(serverResponse)
                 }
             })
             $(this).trigger('reset')

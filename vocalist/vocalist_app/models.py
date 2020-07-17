@@ -61,7 +61,7 @@ class Company(models.Model):
             num = 0
             for review in self.has_reviews.all():
                 num += review.rating
-            return round((num/self.has_reviews.all().count()),1)
+            return round((num/self.has_reviews.all().count()),2)
         else:
             return "no reviews"
 
