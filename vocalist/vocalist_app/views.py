@@ -30,6 +30,13 @@ def the_list(request):
         }
     return render(request, "list.html", context)
 
+def the_list_filtered(request):
+    company_list = Company.objects.all()
+    context={
+        'companies': CompanyFilter(request.GET, queryset=company_list)
+    }
+    return render(request, "snippets/list_filtered.html", context)
+
 def company_profile(request, slug):
     if 'user_id' not in request.session:
         context={
