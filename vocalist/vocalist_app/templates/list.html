@@ -42,14 +42,14 @@
             </div>
         </nav>
         <div class="container-fluid d-flex row justify-content-around mt-5 ml-3">
-            <form action="{% url 'list_filtered' %}" class="col-md-3">
+            <form action="{% url 'list_filtered' %}" class="col-md-3" id="form-all">
                 <input type="submit" class="btn btn-custom col-md-8" value="All YAPs">
             </form>
-            <form action="{% url 'list_filtered' %}" method="GET" class="col-md-3">
+            <form action="{% url 'list_filtered' %}" method="GET" class="col-md-3" id="form-summer">
                 <input type="hidden" name="category" value="summer">
                 <input type="submit" class="btn btn-custom col-md-8" value="Summer YAPs">
             </form>
-            <form action="{% url 'list_filtered' %}" method="GET" class="col-md-3">
+            <form action="{% url 'list_filtered' %}" method="GET" class="col-md-3" id="form-residency">
                 <input type="hidden" name="category" value="residency">
                 <input type="submit" class="btn btn-custom col-md-8" value="Resident YAPs">
             </form>
@@ -62,7 +62,27 @@
                 </div>
             </form>
         </div>
-        <div class="container-fluid mt-2 mb-5">
+        <form action="{% url 'list_filtered' %}" class="container-fluid d-flex col-md-6 mt-3 ml-2 justify-content-around" id="perks_form">
+            <input class ="checkbox" type="checkbox" name="category" id="category-summer" value="summer" style="display:none">
+            <input class ="checkbox" type="checkbox" name="category" id="category-residency" value="residency" style="display:none">
+            <div class="form-group mb-0">
+                <label class="font-weight-bold">AGMA</label>
+                <input class= "checkbox" type="checkbox" name="agma" id="agma" value=1>
+            </div>
+            <div class="form-group mb-0">
+                <label for="" class="font-weight-bold">Housing</label>
+                <input class= "checkbox" type="checkbox" name="housing" id="" value=1>
+            </div>
+            <div class="form-group mb-0">
+                <label for="" class="font-weight-bold">Travel Stipend</label>
+                <input class= "checkbox" type="checkbox" name="travel_stipend" id="" value=1>
+            </div>
+            <div class="form-group mb-0">
+                <label for="" class="font-weight-bold">Benefits</label>
+                <input class= "checkbox" type="checkbox" name="benefits" id="" value=1>
+            </div>
+        </form>
+        <div class="container-fluid mb-5">
             <table class="table table-striped table-bordered" id="the_list">
                 <thead>
                     <tr>
@@ -166,9 +186,39 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
     <script>
-        $('form').submit(function(e){
+        $('#form-all').submit(function(e){
             e.preventDefault()
             form_url = $(this).attr('action')
+            $.get({
+                url:form_url,
+                data:$(this).serialize(),
+                success: function(serverResponse){
+                    $('#the_list').html(serverResponse)
+                }
+            });
+            $('#perks_form').trigger('reset')
+        })
+
+        $('#form-summer').submit(function(e){
+            e.preventDefault()
+            form_url = $(this).attr('action')
+            $('#category-summer').prop('checked', true)
+            $('#category-residency').prop('checked', false)
+
+            $.get({
+                url:form_url,
+                data:$(this).serialize(),
+                success: function(serverResponse){
+                    $('#the_list').html(serverResponse)
+                }
+            });
+        })
+
+        $('#form-residency').submit(function(e){
+            e.preventDefault()
+            form_url = $(this).attr('action')
+            $('#category-summer').prop('checked', false)
+            $('#category-residency').prop('checked', true)
             $.get({
                 url:form_url,
                 data:$(this).serialize(),
@@ -187,5 +237,16 @@
                 }
             });
         })
+
+        $('.checkbox').change(function(e){
+            $.get({
+                url:'filtered',
+                data:$('#perks_form').serialize(),
+                success: function(serverResponse){
+                    $('#the_list').html(serverResponse)
+                }
+            });
+        })
+            
     </script>
 </body>

@@ -7,24 +7,24 @@ from datetime import datetime
 
 # Create your models here.
 
-class CompanyQuerySet(models.QuerySet):
-    def summer(self):
-        return self.filter(category__iexact='summer')
+# class CompanyQuerySet(models.QuerySet):
+#     def summer(self):
+#         return self.filter(category__iexact='summer')
     
-    def residency(self):
-        return self.filter(category__iexact="residency")
+#     def residency(self):
+#         return self.filter(category__iexact="residency")
     
-    def agma(self):
-        return self.filter(agma=True)
+#     def agma(self):
+#         return self.filter(agma=True)
     
-    def housing(self):
-        return self.filter(housing=True)
+#     def housing(self):
+#         return self.filter(housing=True)
     
-    def travel_stipend(self):
-        return self.filter(travel_stipend=True)
+#     def travel_stipend(self):
+#         return self.filter(travel_stipend=True)
     
-    def benefits(self):
-        return self.filter(benefits=True)
+#     def benefits(self):
+#         return self.filter(benefits=True)
 
 class Company(models.Model):
     name = models.CharField(max_length=255)
@@ -43,7 +43,6 @@ class Company(models.Model):
     created_at = models.DateField(auto_now_add = True)
     updated_at = models.DateField(auto_now= True)
 
-    objects = CompanyQuerySet.as_manager()
 
     def __str__(self):
         return f'{self.name}'
