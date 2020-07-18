@@ -79,3 +79,9 @@ class Review(models.Model):
     def dateEdited(self):
         return datetime.strftime(self.updated_at, "%B %d, %Y")
 
+class Report(models.Model):
+    content = models.TextField()
+    review = models.ForeignKey(Review, related_name = "has_reports", on_delete=models.CASCADE)
+    reporter = models.ForeignKey(User, related_name="has_reported", on_delete=models.CASCADE)
+    created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now= True)

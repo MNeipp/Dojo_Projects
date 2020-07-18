@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse, reverse
 from user_app.models import User
-from .models import Company, Review
+from .models import Company, Review, Report
 from .filters import CompanyFilter
 from django.contrib import messages
 import bcrypt
@@ -50,6 +50,9 @@ def company_profile(request, slug):
     return render(request, "company_profile.html", context)
 
 def create_review(request, slug):
+    if int(request.POST['rating']) < 1  or int(request.POST['rating']) > 5:
+        messages.error(request, "Please enter a valid rating")
+        return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
     company = Company.objects.get(slug=slug)
     logged_user = User.objects.get(id=request.session['user_id'])
     if "anonymous" in request.POST:
@@ -71,6 +74,8 @@ def delete_review(request, review_id):
 
 def edit_review(request, review_id):
     if request.method == "POST":
+        if int(request.POST['rating']) < 1  or int(request.POST['rating']) > 5:
+            return HttpResponse("<h3 class='text-danger'> Please enter a valid rating </h3>")
         to_edit = Review.objects.get(id=review_id)
         to_edit.rating = request.POST['rating']
         to_edit.content = request.POST['content']
@@ -83,7 +88,58 @@ def edit_review(request, review_id):
         return redirect(reverse('index'))
 
 def privacy_policy(request):
-    return render(request, "privacy_policy.html")
+    if 'user_id' not in request.session:
+        return render(request, "privacy_policy.html")
+    else:
+        context={
+            'logged_user': User.objects.get(id=request.session['user_id'])
+        }
+        return render(request, "privacy_policy.html", context)
+
 
 def terms_of_use(request):
-    return render(request, "terms_of_use.html")
+    if 'user_id' not in request.session:
+        return render(request, "terms_of_use.html")
+    else:
+        context={
+            'logged_user': User.objects.get(id=request.session['user_id'])
+        }
+        return render(request, "terms_of_use.html", context)
+
+def about(request):
+    if 'user_id' not in request.session:
+        return render(request, "about.html")
+    else:
+        context={
+            'logged_user': User.objects.get(id=request.session['user_id'])
+        }
+        return render(request, "about.html", context)
+
+def report(request, review_id):
+    if request.method == "POST":
+        review = Review.objects.get(id=review_id)
+        reporter = User.objects.get(id=request.POST['reporter_id'])
+        Report.objects.create(content = request.POST['content'], review=review, reporter = reporter)
+        return HttpResponse("<h2>Thank you for your report!</h2>")
+    
+    else:
+        if 'user_id' not in request.session:
+            return render(request, "report.html") 
+        else:
+            context={
+            'logged_user': User.objects.get(id=request.session['user_id']),
+            'review': Review.objects.get(id=review_id)
+        }
+        return render(request, "report.html", context)
+
+def contribute(request):
+    if request.method == "POST":
+        pass
+    else:
+        if 'user_id' not in request.session:
+            return render(request, "report.html") 
+        else:
+            context={
+            'logged_user': User.objects.get(id=request.session['user_id']),
+        }
+        return render(request, "report.html", context)

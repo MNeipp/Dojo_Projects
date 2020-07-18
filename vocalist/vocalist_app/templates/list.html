@@ -29,7 +29,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav ml-auto">
-                        <a class="nav-link font-weight-bold" href="#">About</a>
+                        <a class="nav-link font-weight-bold" href="{% url 'about' %}">About</a>
                         <a class="nav-link font-weight-bold active disabled" href="#">The List</a>
                         {% if logged_user %}
                         <a class="nav-link font-weight-bold" href="{% url 'user_profile' %}">Profile</a>
@@ -97,43 +97,33 @@
                     <tr>
                         <td class="font-weight-bold"><u><a href="{% url 'company_profile' company.slug %}">{{company.name}}</a></u></td>
                         <td class="font-weight-bold">                                
-                            {% if company.averageRating == 0 %}
-                            <span class="font-weight-bold text-danger"><i class="fa fa-star-o"></i><i
-                                    class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i
-                                    class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
-                            </span>
-                            {% elif company.averageRating > 0 and company.averageRating < 1 %}
-                            <span class="font-weight-bold text-danger" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-star-half-alt"></i><i
-                                    class="fas fa-star-o"></i><i class="fas fa-star-o"></i><i
-                                    class="fas fa-star-o"></i><i class="fa fa-star-o"></i>
-                            </span>
-                            {% elif company.averageRating >= 1.0 and company.averageRating < 1.5%}
-                            <span class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                            {% if company.averageRating >= 1.0 and company.averageRating < 1.5%}
+                            <span class="font-weight-bold text-danger" data-toggle="tooltip" data-placement="bottom" title="Average Rating = {{company.averageRating}}"><i class="fas fa-star"></i><i
                                     class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i
                                     class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
                             </span>
                             {% elif company.averageRating >= 1.5 and company.averageRating < 2 %}
-                            <span class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                            <span class="font-weight-bold text-danger" data-toggle="tooltip" data-placement="bottom" title="Average Rating = {{company.averageRating}}"><i class="fas fa-star"></i><i
                                     class="fas fa-star-half-alt"></i><i class="fa fa-star-o"></i><i
                                     class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
                             </span>
                             {% elif company.averageRating >= 2.0 and company.averageRating < 2.5 %}
-                            <span class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                            <span class="font-weight-bold text-danger" data-toggle="tooltip" data-placement="bottom" title="Average Rating = {{company.averageRating}}"><i class="fas fa-star"></i><i
                                     class="fas fa-star"></i><i class="fa fa-star-o"></i> <i
                                     class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
                             </span>
                             {% elif company.averageRating >= 2.5 and company.averageRating < 3 %}
-                            <span class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                            <span class="font-weight-bold text-danger" data-toggle="tooltip" data-placement="bottom" title="Average Rating = {{company.averageRating}}"><i class="fas fa-star"></i><i
                                     class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i
                                     class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
                             </span>
                             {% elif company.averageRating >= 3.0 and company.averageRating < 3.5 %}
-                            <span class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                            <span class="font-weight-bold text-danger" data-toggle="tooltip" data-placement="bottom" title="Average Rating = {{company.averageRating}}"><i class="fas fa-star"></i><i
                                     class="fas fa-star" ></i><i class="fas fa-star"></i><i
                                     class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
                             </span>
                             {% elif company.averageRating >= 3.5 and company.averageRating < 4 %}
-                            <span class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                            <span class="font-weight-bold text-danger"  data-toggle="tooltip" data-placement="bottom" title="Average Rating = {{company.averageRating}}"><i class="fas fa-star"></i><i
                                     class="fas fa-star"></i><i class="fas fa-star"></i><i
                                     class="fas fa-star-half-alt"></i><i class="fa fa-star-o"></i><small
                                     class='ml-2'><em class="text-dark">{{company.has_reviews.all.count}}
@@ -145,17 +135,17 @@
                                     </em></small>
                             </span>
                             {% elif company.averageRating >= 4.0 and company.averageRating < 4.5%}
-                            <span class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                            <span class="font-weight-bold text-danger" data-toggle="tooltip" data-placement="bottom" title="Average Rating = {{company.averageRating}}"><i class="fas fa-star"></i><i
                                     class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                                     class="fa fa-star-o"></i>
                             </span>
                             {% elif company.averageRating >= 4.5  and company.averageRating < 4.8%}
-                            <span class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                            <span class="font-weight-bold text-danger" data-toggle="tooltip" data-placement="bottom" title="Average Rating = {{company.averageRating}}"><i class="fas fa-star"></i><i
                                     class="fas fa-star"></i><i class="fas fa-star"></i> <i
                                     class="fas fa-star"></i><i class="fa fa-star-half-alt"></i>
                             </span>
                             {% elif company.averageRating >= 4.8 %}
-                            <span class="font-weight-bold text-danger"><i class="fas fa-star"></i><i
+                            <span class="font-weight-bold text-danger" data-toggle="tooltip" data-placement="bottom" title="Average Rating = {{company.averageRating}}"><i class="fas fa-star"></i><i
                                     class="fas fa-star"></i><i class="fas fa-star"></i> <i
                                     class="fas fa-star"></i><i class="fa fa-star"></i>
                             </span>
@@ -169,10 +159,32 @@
                 </tbody>
             </table>
         </div>
-        <div class="container-fluid d-flex align-items-center justify-content-center flex-wrap"
-            style="background-color:#2B2D2F; height:125px">
-            <hr class="border border-light w-100 mt-5 mb-0">
-            <small class="text-light mb-3"> &copy; Mason Gates</small>
+        <div class="container-fluid mt-5" style="background-color:#2B2D2F;">
+            <div class="row d-flex justify-content-around">
+                <div class="col-2"></div>
+                <div class="col-md-4 text">
+                    <ul class="list-unstyled mt-2">
+                        <li><a href="{% url 'index' %}" class="text-light"><small>Index</small></a></li>
+                        <li><a href="{% url 'about' %}" class="text-light"><small>About</small></a></li>
+                        <li><a href="{% url 'terms_of_use' %}" class="text-light"><small>Terms of Use</small></a></li>
+                        <li><a href="{% url 'privacy_policy' %}" class="text-light"><small>Privacy Policy</small></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 text">
+                    <ul class="list-unstyled mt-2">
+                        <li><a href="{% url 'list' %}" class="text-light"><small>The List</small></a></li>
+                        <li><a href="{% url 'login' %}" class="text-light"><small>Log In</small></a></li>
+                        <li><a href="{% url 'register' %}" class="text-light"><small>Register</small></a></li>
+                        <li><a href="{}" class="text-light"><small>Contribute</small></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <hr class="border border-light w-100 mb-0 mt-0" >
+            </div>
+            <div class="row d-flex justify-content-center">
+                <small class="text-light mb-3 mt-3"> &copy; Mason Gates</small>
+            </div>
         </div>
 
     </div>

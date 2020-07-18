@@ -28,7 +28,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav ml-auto">
-                        <a class="nav-link font-weight-bold" href="#">About</a>
+                        <a class="nav-link font-weight-bold" href="{% url 'about' %}">About</a>
                         <a class="nav-link font-weight-bold" href="{% url 'list' %}">The List</a>
                         {% if logged_user %}
                         <a class="nav-link font-weight-bold active disabled" href="{% url 'user_profile' %}">Profile</a>
@@ -161,6 +161,7 @@
                         {% csrf_token %}
                         <h5>{{review.company.name}}</h5>
                         <div class="form-check form-check-inline mb-3 text-danger">
+                            <input type="radio" name="rating" value=0 class="form-check-input" style="display:none" checked>
                             <input type="radio" name="rating" value=1 class="form-check-input" style="display:none">
                             <i class="fa fa-star-o star text-danger"></i>
                             <input type="radio" name="rating" value=2 class="form-check-input" style="display:none">
@@ -189,10 +190,33 @@
             
         </div>
 
-        <div class="container-fluid d-flex align-items-center justify-content-center flex-wrap mt-4"
-            style="background-color:#2B2D2F; height:125px">
-            <hr class="border border-light w-100 mt-5 mb-0">
-            <small class="text-light mb-3"> &copy; Mason Gates</small>
+        <div class="container-fluid mt-5" style="background-color:#2B2D2F;">
+            <div class="row d-flex justify-content-start">
+                <div class="col-md-3 text">
+                    <ul class="list-unstyled mt-2">
+                        <li><a href="{% url 'index' %}" class="text-light"><small>Index</small></a></li>
+                        <li><a href="{% url 'about' %}" class="text-light"><small>About</small></a></li>
+                        <li><a href="{% url 'terms_of_use' %}" class="text-light"><small>Terms of Use</small></a></li>
+                        <li><a href="{% url 'privacy_policy' %}" class="text-light"><small>Privacy Policy</small></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 text">
+                    <ul class="list-unstyled mt-2">
+                        <li><a href="{% url 'list' %}" class="text-light"><small>The List</small></a></li>
+                        <li><a href="{% url 'login' %}" class="text-light"><small>Log In</small></a></li>
+                        <li><a href="{% url 'register' %}" class="text-light"><small>Register</small></a></li>
+                        <li><a href="" class="text-light"><small>Contribute</small></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <hr class="border border-light w-100 mb-0 mt-0" >
+            </div>
+            <div class="row d-flex justify-content-start">
+                <div class="col-md-2 mb-2 mt-2">
+                    <small class="text-light"> &copy; Mason Gates</small>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -209,7 +233,6 @@
         $('#user_reviews').on('submit', 'form', function(e){
             e.preventDefault()
             var form_url = $(this).attr('action')
-            console.log(form_url)
             $.ajax({
                 method: 'POST',
                 url: form_url,

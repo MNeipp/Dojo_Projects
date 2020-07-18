@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang=>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Voca\LIST</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
+    <!-- Google Font embed -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Parisienne&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/0eb52090db.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#efefef">
+            <div class="container-fluid">
+                <a href="{% url 'index' %}"><img src="{% static 'img/vocalist-logo.png' %}" class="navbar-brand"
+                        height=150px width=400px></img></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ml-auto">
+                        <a class="nav-link font-weight-bold active disabled" href="{% url 'about' %}">About</a>
+                        <a class="nav-link font-weight-bold" href="{% url 'list' %}">The List</a>
+                        {% if logged_user %}
+                        <a class="nav-link font-weight-bold" href="{% url 'user_profile' %}">Profile</a>
+                        <a class="nav-link font-weight-bold" href="{% url 'logout' %} ">Log Out</a>
+                        {% else %}
+                        <a class="nav-link font-weight-bold" href="{% url 'login' %} ">Log In</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6 border-right mt-2 mr-5">
+                    <h1 class="display-4 mb-4 ml-3 text-danger">About Voca<span class="text-dark">List</span></h1>
+                    <p style="text-indent: 40px;" class="my-3">The VocaList was created by young artists, for young artists. The goal is to provide a safe resource for singers to share their experiences, positive and negative, with Young Artist Programs.</p>
+                    <p style="text-indent: 40px;" class="my-3">The VocaList allows artists to review YAPs they have participated in, with the option to post their reviews anonymously. Without the fear of hindering their careers, we encourage artists to be honest and fair in their reviews.</p>
+                    <p style="text-indent: 40px;" class="my-3">In the future, we hope to expand the VocaList to include Pay-to-Sing training programs, as well as University and Conservatory programs. </p>
+                </div>
+                <div class="col-md-5 mt-2 pl-0">
+                    <h1 class="display-4 mb-4 ml-3 text-danger">Contribute</h1>
+                    <p style="text-indent: 40px;" class="my-3">If there is a YAP that you would like to see be included in the VocaList, please provide any and all information you may have by clicking <u><a href="" class="text-info font-weight-bold">here</a></u>.</p>
+                    <p style="text-indent: 40px;" class="my-3">The VocaList is and always will be free. However, if you find this resource useful and would like to help pay for server costs, you may do so below. Donations will only be used for maintenance of the VocaList. Thank you for your support!</p>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid mt-5" style="background-color:#2B2D2F;">
+            <div class="row d-flex justify-content-around">
+                <div class="col-2"></div>
+                <div class="col-md-4 text">
+                    <ul class="list-unstyled mt-2">
+                        <li><a href="{% url 'index' %}" class="text-light"><small>Index</small></a></li>
+                        <li><a href="{% url 'about' %}" class="text-light"><small>About</small></a></li>
+                        <li><a href="{% url 'terms_of_use' %}" class="text-light"><small>Terms of Use</small></a></li>
+                        <li><a href="{% url 'privacy_policy' %}" class="text-light"><small>Privacy Policy</small></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 text">
+                    <ul class="list-unstyled mt-2">
+                        <li><a href="{% url 'list' %}" class="text-light"><small>The List</small></a></li>
+                        <li><a href="{% url 'login' %}" class="text-light"><small>Log In</small></a></li>
+                        <li><a href="{% url 'register' %}" class="text-light"><small>Register</small></a></li>
+                        <li><a href="{}" class="text-light"><small>Contribute</small></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <hr class="border border-light w-100 mb-0 mt-0" >
+            </div>
+            <div class="row d-flex justify-content-center">
+                <small class="text-light mb-3 mt-3"> &copy; Mason Gates</small>
+            </div>
+        </div>
+    </div>
+</body>

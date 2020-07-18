@@ -54,10 +54,11 @@ def logout(request):
 def user_profile(request):
     if 'user_id' not in request.session:
         return reverse('login')
-    context={
-        'logged_user': User.objects.get(id=request.session['user_id'])
-    }
-    return render(request, "user_profile.html", context)
+    else:
+        context={
+            'logged_user': User.objects.get(id=request.session['user_id'])
+        }
+        return render(request, "user_profile.html", context)
 
 def update_profile(request):
     if request.method == "GET":
