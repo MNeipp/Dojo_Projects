@@ -14,8 +14,12 @@
             {% elif review.rating == 5 %}
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
             {% endif %}
-                <small><em class="text-dark font-weight-bold">{{review.datePosted}}</em></small>
-            </h6>
+            {% if review.dateEdited != review.datePosted %}
+            <small><em class="text-dark font-weight-bold">edited {{review.dateEdited}}</em></small>
+             {% else %}
+            <small><em class="text-dark font-weight-bold">{{review.datePosted}}</em></small>
+            {% endif %}            
+        </h6>
         <p>{{review.content}}</p>
         <form action="{% url 'delete_review' review.id %}" method="POST" class="d-flex justify-content-start">
             {% csrf_token %}
