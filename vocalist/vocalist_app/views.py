@@ -137,9 +137,9 @@ def contribute(request):
         pass
     else:
         if 'user_id' not in request.session:
-            return render(request, "report.html") 
+            return render(request, "contribute.html") 
         else:
             context={
             'logged_user': User.objects.get(id=request.session['user_id']),
         }
-        return render(request, "report.html", context)
+        return render(request, "contribute.html", context)

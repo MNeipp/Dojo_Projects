@@ -48,10 +48,43 @@
                     <h3 class="mb-4">Request a YAP to be added</h2>
                     <form action="{% url 'contribute' %}" method="POST">
                         {% csrf_token %}
-                        <textarea name="content" class="w-100" rows="5" placeholder="Why is this review being reported?" style="resize:none" required></textarea>
+                        <div class="form-group">
+                            <label for="name">Program Name</label>
+                            <input type="text" name="name" id="name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <select class="custom-select">
+                                <option selected="">Select a category</option>
+                                <option value="summer">Summer YAP</option>
+                                <option value="residency">Residency YAP</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="stipend">Weekly Stipend</label>
+                            <input type="text" name="weekly_stipend" id="stipend" class="form-control">
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <label for="min_age">Minimum Age</label>
+                                <input type="text" name = "min_age" id=min_age class="form-control" placeholder="(optional)">
+                            </div>
+                            <div class="col-4">
+                                <label for="max_age">Maximum Age</label>
+                                <input type="text" name = "max_age" id=min_age class="form-control" placeholder="(optional)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Select all that apply:</label>
+                            <div class="row d-flex justify-content-around">
+                                <input type="checkbox" value="">
+                                <input type="checkbox" value="">
+                                <input type="checkbox" value="">
+                                <input type="checkbox" value="">
+                            </div>
+                        </div>
                         <input type="hidden" name="reporter_id" value={{logged_user.id}}>
                         <div class="text-right mt-3">
-                            <input type="submit"class="btn btn-custom" value="Report Review">
+                            <input type="submit"class="btn btn-custom" value="Add YAP">
                         </div>
                     </form>
                 </div>
@@ -84,7 +117,7 @@
                         <li><a href="{% url 'list' %}" class="text-light"><small>The List</small></a></li>
                         <li><a href="{% url 'login' %}" class="text-light"><small>Log In</small></a></li>
                         <li><a href="{% url 'register' %}" class="text-light"><small>Register</small></a></li>
-                        <li><a href="{}" class="text-light"><small>Contribute</small></a></li>
+                        <li><a href="{% url 'contribute' %}" class="text-light"><small>Contribute</small></a></li>
                     </ul>
                 </div>
             </div>
