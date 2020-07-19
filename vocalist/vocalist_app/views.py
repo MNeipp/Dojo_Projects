@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse, reverse
 from user_app.models import User
-from .models import Company, Review, Report
+from .models import Company, Review, Report, YAPRequest
 from .filters import CompanyFilter
 from django.contrib import messages
 import bcrypt
@@ -134,7 +134,32 @@ def report(request, review_id):
 
 def contribute(request):
     if request.method == "POST":
-        pass
+        name = request.POST['name']
+        category = request.POST['category']
+        weekly_stipend = request.POST['weekly_stipend']
+        if 'agma' in request.POST:
+            agma = True
+        else:
+            agma = False
+        if 'benefits' in request.POST:
+            benefits = True
+        else:
+            benefits = False
+        if 'housing' in request.POST:
+            housing = True
+        else:
+            housing = False
+        if 'travel_stipend' in request.POST:
+            travel_stipend = True
+        else:
+            travel_stipend = False
+        min_age = request.POST['min_age']
+        max_age = request.POST['max_age']
+        
+        YAPRequest.objects.create(name = name, weekly_stipend = weekly_stipend, category = category, agma = agma, housing = housing, benefits = benefits, travel_stipend = travel_stipend, maximum_age= max_age, minimum_age = min_age)
+        return HttpResponse("<h2>Thank you for contributing!</h2>")
+
+
     else:
         if 'user_id' not in request.session:
             return render(request, "contribute.html") 

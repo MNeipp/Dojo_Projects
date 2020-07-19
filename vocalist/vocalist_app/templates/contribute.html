@@ -43,17 +43,17 @@
 
         {% if logged_user %}
         <div class="container-fluid mt-4">
-            <div class="row d-flex justify-content-center" id="report">
+            <div class="row d-flex justify-content-center" id="yap_request">
                 <div class="col-md-4">
                     <h3 class="mb-4">Request a YAP to be added</h2>
                     <form action="{% url 'contribute' %}" method="POST">
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="name">Program Name</label>
-                            <input type="text" name="name" id="name" class="form-control">
+                            <input type="text" name="name" id="name" class="form-control" placeholder="(Required)" required>
                         </div>
                         <div class="form-group">
-                            <select class="custom-select">
+                            <select class="custom-select" name="category" required>
                                 <option selected="">Select a category</option>
                                 <option value="summer">Summer YAP</option>
                                 <option value="residency">Residency YAP</option>
@@ -61,7 +61,7 @@
                         </div>
                         <div class="form-group">
                             <label for="stipend">Weekly Stipend</label>
-                            <input type="text" name="weekly_stipend" id="stipend" class="form-control">
+                            <input type="text" name="weekly_stipend" id="stipend" class="form-control" placeholder="(optional)">
                         </div>
                         <div class="form-group row">
                             <div class="col-4">
@@ -76,13 +76,28 @@
                         <div class="form-group">
                             <label for="">Select all that apply:</label>
                             <div class="row d-flex justify-content-around">
-                                <input type="checkbox" value="">
-                                <input type="checkbox" value="">
-                                <input type="checkbox" value="">
-                                <input type="checkbox" value="">
+                                <div class="form-group text-center" >
+                                    <input type="checkbox" value="housing" name="housing">
+                                    <br>
+                                    <label for="housing">Housing</label>
+                                </div>
+                                <div class="form-group text-center">
+                                    <input type="checkbox" value="benefits" name="benefits">
+                                    <br>
+                                    <label for="Benefits">Benefits</label>
+                                </div>
+                                <div class="form-group text-center">
+                                    <input type="checkbox" value="travel_stipend" name="travel_stipend">
+                                    <br>
+                                    <label for="travel_stipend">Travel Stipend</label>
+                                </div>
+                                <div class="form-group text-center">
+                                    <input type="checkbox" value="agma" name="agma">
+                                    <br>
+                                    <label for="agma">AGMA</label>
+                                </div>
                             </div>
                         </div>
-                        <input type="hidden" name="reporter_id" value={{logged_user.id}}>
                         <div class="text-right mt-3">
                             <input type="submit"class="btn btn-custom" value="Add YAP">
                         </div>
@@ -147,7 +162,7 @@
                 url: $(this).attr('action'),
                 data: $(this).serialize(),
                 success: function(serverResponse){
-                    $('#report').html(serverResponse)
+                    $('#yap_request').html(serverResponse)
                 }
             })
         })

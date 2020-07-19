@@ -85,3 +85,16 @@ class Report(models.Model):
     reporter = models.ForeignKey(User, related_name="has_reported", on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now= True)
+
+class YAPRequest(models.Model):
+    name = models.CharField(max_length=255)
+    weekly_stipend = models.CharField( max_length = 50, blank=True, null=True)
+    category = models.CharField(max_length=20)
+    agma = models.BooleanField(default = False)
+    housing = models.BooleanField(default = False)
+    travel_stipend = models.BooleanField(default=False)
+    benefits = models.BooleanField(default=False)
+    minimum_age = models.CharField(max_length = 3, blank=True, null=True)
+    maximum_age = models.CharField(max_length = 3, blank=True, null =True)
+    created_at = models.DateField(auto_now_add = True)
+    updated_at = models.DateField(auto_now= True)
