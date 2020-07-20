@@ -52,15 +52,18 @@
                 </div>
                 <div class="col-md-5 mt-2 pl-0">
                     <h1 class="display-4 mb-4 ml-3 text-danger">Contribute</h1>
-                    <p style="text-indent: 40px;" class="my-3">If there is a YAP that you would like to see be included in the VocaList, please provide any and all information you may have by clicking <u><a href="" class="text-info font-weight-bold">here</a></u>.</p>
+                    <p style="text-indent: 40px;" class="my-3">If there is a YAP that you would like to see be included in the VocaList, please provide any and all information you may have by clicking <u><a href="{% url 'contribute' %}" class="text-info font-weight-bold">here</a></u>.</p>
                     <p style="text-indent: 40px;" class="my-3">The VocaList is and always will be free. However, if you find this resource useful and would like to help pay for server costs, you may do so below. Donations will only be used for maintenance of the VocaList. Thank you for your support!</p>
+                    <div class="text-center">
+
+                        <a href="{% url 'donate' %}" class="btn btn-custom">Click Here to Donate!</a>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="container-fluid mt-5" style="background-color:#2B2D2F;">
-            <div class="row d-flex justify-content-around">
-                <div class="col-2"></div>
-                <div class="col-md-4 text">
+            <div class="row d-flex justify-content-start">
+                <div class="col-md-3 text">
                     <ul class="list-unstyled mt-2">
                         <li><a href="{% url 'index' %}" class="text-light"><small>Index</small></a></li>
                         <li><a href="{% url 'about' %}" class="text-light"><small>About</small></a></li>
@@ -73,16 +76,19 @@
                         <li><a href="{% url 'list' %}" class="text-light"><small>The List</small></a></li>
                         <li><a href="{% url 'login' %}" class="text-light"><small>Log In</small></a></li>
                         <li><a href="{% url 'register' %}" class="text-light"><small>Register</small></a></li>
-                        <li><a href="{}" class="text-light"><small>Contribute</small></a></li>
+                        <li><a href="" class="text-light"><small>Contribute</small></a></li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <hr class="border border-light w-100 mb-0 mt-0" >
             </div>
-            <div class="row d-flex justify-content-center">
-                <small class="text-light mb-3 mt-3"> &copy; Mason Gates</small>
+            <div class="row d-flex justify-content-start">
+                <div class="col-md-2 mb-2 mt-2">
+                    <small class="text-light"> &copy; Mason Gates</small>
+                </div>
             </div>
         </div>
     </div>
 </body>
+</html>

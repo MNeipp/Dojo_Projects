@@ -10,6 +10,8 @@ class CompanyFilter(django_filters.FilterSet):
     travel_stipend = django_filters.CharFilter(lookup_expr="icontains")
     benefits = django_filters.CharFilter(lookup_expr="icontains")
 
+    o = django_filters.OrderingFilter()
+
         
     class Meta:
         model = Company

@@ -26,7 +26,7 @@ def the_list(request):
         }
     else:
         context={
-            'companies': CompanyFilter(request.GET, queryset=company_list),
+            'companies': CompanyFilter(request.GET, queryset=company_list)
         }
     return render(request, "list.html", context)
 
@@ -158,8 +158,6 @@ def contribute(request):
         
         YAPRequest.objects.create(name = name, weekly_stipend = weekly_stipend, category = category, agma = agma, housing = housing, benefits = benefits, travel_stipend = travel_stipend, maximum_age= max_age, minimum_age = min_age)
         return HttpResponse("<h2>Thank you for contributing!</h2>")
-
-
     else:
         if 'user_id' not in request.session:
             return render(request, "contribute.html") 
@@ -168,3 +166,6 @@ def contribute(request):
             'logged_user': User.objects.get(id=request.session['user_id']),
         }
         return render(request, "contribute.html", context)
+
+# def donate(request):
+#     return render(request, "donate.html")

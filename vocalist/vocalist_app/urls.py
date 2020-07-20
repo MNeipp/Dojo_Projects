@@ -5,6 +5,7 @@ urlpatterns=[
     path('the-list/', views.the_list, name="list"),
     path('the-list/contribute', views.contribute, name="contribute"),
     path('the-list/about', views.about, name="about"),
+    # path('the-list/donate', views.donate, name="donate"),
     path('the-list/filtered', views.the_list_filtered, name="list_filtered"),
     path('the-list/<slug:slug>', views.company_profile, name="company_profile"),
     path('the-list/<slug:slug>/review', views.create_review, name="create_review"),

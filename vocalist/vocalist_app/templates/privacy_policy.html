@@ -310,9 +310,8 @@
             </div>
 
             <div class="container-fluid mt-5" style="background-color:#2B2D2F;">
-                <div class="row d-flex justify-content-around">
-                    <div class="col-2"></div>
-                    <div class="col-md-4 text">
+                <div class="row d-flex justify-content-start">
+                    <div class="col-md-3 text">
                         <ul class="list-unstyled mt-2">
                             <li><a href="{% url 'index' %}" class="text-light"><small>Index</small></a></li>
                             <li><a href="{% url 'about' %}" class="text-light"><small>About</small></a></li>
@@ -325,15 +324,18 @@
                             <li><a href="{% url 'list' %}" class="text-light"><small>The List</small></a></li>
                             <li><a href="{% url 'login' %}" class="text-light"><small>Log In</small></a></li>
                             <li><a href="{% url 'register' %}" class="text-light"><small>Register</small></a></li>
-                            <li><a href="{}" class="text-light"><small>Contribute</small></a></li>
+                            <li><a href="" class="text-light"><small>Contribute</small></a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="row">
                     <hr class="border border-light w-100 mb-0 mt-0" >
                 </div>
-                <div class="row d-flex justify-content-center">
-                    <small class="text-light mb-3 mt-3"> &copy; Mason Gates</small>
+                <div class="row d-flex justify-content-start">
+                    <div class="col-md-2 mb-2 mt-2">
+                        <small class="text-light"> &copy; Mason Gates</small>
+                    </div>
                 </div>
             </div>
 </body>
+</html>

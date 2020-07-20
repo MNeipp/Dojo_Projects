@@ -62,7 +62,7 @@
                 </div>
             </form>
         </div>
-        <form action="{% url 'list_filtered' %}" class="container-fluid d-flex col-md-6 mt-3 ml-2 justify-content-around" id="perks_form">
+        <form action="{% url 'list_filtered' %}" class="container-fluid d-inline-flex col-md-6 mt-3 ml-2 justify-content-around" id="perks_form">
             <input class ="checkbox" type="checkbox" name="category" id="category-summer" value="summer" style="display:none">
             <input class ="checkbox" type="checkbox" name="category" id="category-residency" value="residency" style="display:none">
             <div class="form-group mb-0">
@@ -82,6 +82,17 @@
                 <input class= "checkbox" type="checkbox" name="benefits" id="" value=1>
             </div>
         </form>
+        <div class="dropdown show d-inline float-right mr-3">
+            <a class="btn btn-custom dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Order-By
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item order-by" href="?o=name">A-Z</a>
+                <a class="dropdown-item order-by" href="?o=-name">Z-A</a>
+                <a class="dropdown-item order-by" href="?o=-weekly_stipend">Weekly Stipend (descending)</a>
+                <a class="dropdown-item order-by" href="?o=weekly_stipend">Weekly Stipend (ascending)</a>
+            </div>
+        </div>
         <div class="container-fluid mb-5">
             <table class="table table-striped table-bordered" id="the_list">
                 <thead>
@@ -160,9 +171,8 @@
             </table>
         </div>
         <div class="container-fluid mt-5" style="background-color:#2B2D2F;">
-            <div class="row d-flex justify-content-around">
-                <div class="col-2"></div>
-                <div class="col-md-4 text">
+            <div class="row d-flex justify-content-start">
+                <div class="col-md-3 text">
                     <ul class="list-unstyled mt-2">
                         <li><a href="{% url 'index' %}" class="text-light"><small>Index</small></a></li>
                         <li><a href="{% url 'about' %}" class="text-light"><small>About</small></a></li>
@@ -175,15 +185,17 @@
                         <li><a href="{% url 'list' %}" class="text-light"><small>The List</small></a></li>
                         <li><a href="{% url 'login' %}" class="text-light"><small>Log In</small></a></li>
                         <li><a href="{% url 'register' %}" class="text-light"><small>Register</small></a></li>
-                        <li><a href="{% url 'contribute' %}" class="text-light"><small>Contribute</small></a></li>
+                        <li><a href="" class="text-light"><small>Contribute</small></a></li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <hr class="border border-light w-100 mb-0 mt-0" >
             </div>
-            <div class="row d-flex justify-content-center">
-                <small class="text-light mb-3 mt-3"> &copy; Mason Gates</small>
+            <div class="row d-flex justify-content-start">
+                <div class="col-md-2 mb-2 mt-2">
+                    <small class="text-light"> &copy; Mason Gates</small>
+                </div>
             </div>
         </div>
 
@@ -259,6 +271,20 @@
                 }
             });
         })
+
+        
+        $('.order-by').click(function(e){
+            e.preventDefault()
+
+            $.get({
+                url:'filtered' + $(this).attr('href'),
+                data:$('#perks_form').serialize(),
+                success: function(serverResponse){
+                    $('#the_list').html(serverResponse)
+                }
+            });
+        })
             
     </script>
 </body>
+</html>

@@ -7,25 +7,6 @@ from datetime import datetime
 
 # Create your models here.
 
-# class CompanyQuerySet(models.QuerySet):
-#     def summer(self):
-#         return self.filter(category__iexact='summer')
-    
-#     def residency(self):
-#         return self.filter(category__iexact="residency")
-    
-#     def agma(self):
-#         return self.filter(agma=True)
-    
-#     def housing(self):
-#         return self.filter(housing=True)
-    
-#     def travel_stipend(self):
-#         return self.filter(travel_stipend=True)
-    
-#     def benefits(self):
-#         return self.filter(benefits=True)
-
 class Company(models.Model):
     name = models.CharField(max_length=255)
     weekly_stipend = models.DecimalField(max_digits=7, decimal_places=2)
