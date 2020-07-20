@@ -41,11 +41,11 @@
                 </div>
             </div>
         </nav>
-        <div class="container-fluid d-flex row justify-content-around mt-5 ml-3">
+        <div class="container-fluid d-flex row justify-content-around mt-5 ml-3 my-1">
             <form action="{% url 'list_filtered' %}" class="col-md-3" id="form-all">
                 <input type="submit" class="btn btn-custom col-md-8" value="All YAPs">
             </form>
-            <form action="{% url 'list_filtered' %}" method="GET" class="col-md-3" id="form-summer">
+            <form action="{% url 'list_filtered' %}" method="GET" class="col-md-3 my-1" id="form-summer">
                 <input type="hidden" name="category" value="summer">
                 <input type="submit" class="btn btn-custom col-md-8" value="Summer YAPs">
             </form>
@@ -53,7 +53,7 @@
                 <input type="hidden" name="category" value="residency">
                 <input type="submit" class="btn btn-custom col-md-8" value="Resident YAPs">
             </form>
-            <form action="{% url 'list_filtered' %}" class='col-sm-12 col-md-3 mb-2'>
+            <form action="{% url 'list_filtered' %}" class='col-sm-12 col-md-3 mb-2 my-1'>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-search"></i></span>
@@ -82,11 +82,11 @@
                 <input class= "checkbox" type="checkbox" name="benefits" id="" value=1>
             </div>
         </form>
-        <div class="dropdown show d-inline float-right mr-3">
-            <a class="btn btn-custom dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="dropdown show d-inline float-right mr-3 dropleft">
+            <a class="btn btn-custom dropdown-toggle mb-2" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Order-By
             </a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <div class="dropdown-menu aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item order-by" href="?o=name">A-Z</a>
                 <a class="dropdown-item order-by" href="?o=-name">Z-A</a>
                 <a class="dropdown-item order-by" href="?o=-weekly_stipend">Weekly Stipend (descending)</a>
@@ -172,7 +172,7 @@
         </div>
         <div class="container-fluid mt-5" style="background-color:#2B2D2F;">
             <div class="row d-flex justify-content-start">
-                <div class="col-md-3 text">
+                <div class="col-md-3">
                     <ul class="list-unstyled mt-2">
                         <li><a href="{% url 'index' %}" class="text-light"><small>Index</small></a></li>
                         <li><a href="{% url 'about' %}" class="text-light"><small>About</small></a></li>
@@ -180,14 +180,22 @@
                         <li><a href="{% url 'privacy_policy' %}" class="text-light"><small>Privacy Policy</small></a></li>
                     </ul>
                 </div>
-                <div class="col-md-4 text">
+                <div class="col-md-3">
                     <ul class="list-unstyled mt-2">
                         <li><a href="{% url 'list' %}" class="text-light"><small>The List</small></a></li>
                         <li><a href="{% url 'login' %}" class="text-light"><small>Log In</small></a></li>
                         <li><a href="{% url 'register' %}" class="text-light"><small>Register</small></a></li>
-                        <li><a href="" class="text-light"><small>Contribute</small></a></li>
+                        <li><a href="{% url 'contribute' %}" class="text-light"><small>Contribute</small></a></li>
                     </ul>
                 </div>
+                {% if logged_user.user_level == 9%}
+                <div class="col-md-3">
+                    <ul class="list-unstyled mt-2">
+                        <li><a href="{% url 'requests' %}" class="text-light"><small>YAP Requests</small></a></li>
+                        <li><a href="{% url 'all_reports' %}" class="text-light"><small>Review Reports</small></a></li>
+                    </ul>
+                </div>
+                {% endif %}
             </div>
             <div class="row">
                 <hr class="border border-light w-100 mb-0 mt-0" >
@@ -254,7 +262,7 @@
 
         $('#search_name').keyup(function(e){
             $.get({
-                url:'filtered',
+                url:'the-list/filtered',
                 data:$(this).serialize(),
                 success: function(serverResponse){
                     $('#the_list').html(serverResponse)
@@ -264,7 +272,7 @@
 
         $('.checkbox').change(function(e){
             $.get({
-                url:'filtered',
+                url:'the-list/filtered',
                 data:$('#perks_form').serialize(),
                 success: function(serverResponse){
                     $('#the_list').html(serverResponse)
@@ -272,12 +280,10 @@
             });
         })
 
-        
         $('.order-by').click(function(e){
             e.preventDefault()
-
             $.get({
-                url:'filtered' + $(this).attr('href'),
+                url:'the-list/filtered' + $(this).attr('href'),
                 data:$('#perks_form').serialize(),
                 success: function(serverResponse){
                     $('#the_list').html(serverResponse)

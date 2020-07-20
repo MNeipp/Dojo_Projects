@@ -2,10 +2,10 @@ from django.urls import path
 from . import views
 urlpatterns=[
     path('', views.index,name="index"),
-    path('the-list/', views.the_list, name="list"),
+    path('the-list', views.the_list, name="list"),
     path('the-list/contribute', views.contribute, name="contribute"),
     path('the-list/about', views.about, name="about"),
-    # path('the-list/donate', views.donate, name="donate"),
+    path('the-list/donate', views.donate, name="donate"),
     path('the-list/filtered', views.the_list_filtered, name="list_filtered"),
     path('the-list/<slug:slug>', views.company_profile, name="company_profile"),
     path('the-list/<slug:slug>/review', views.create_review, name="create_review"),
@@ -14,4 +14,10 @@ urlpatterns=[
     path('privacy-policy', views.privacy_policy, name="privacy_policy"),
     path('terms-of-use', views.terms_of_use, name="terms_of_use"),
     path('the-list/report/<int:review_id>', views.report, name="report"),
+    path('yap-requests', views.yap_requests, name="requests"),
+    path('yap-requests/delete/<int:request_id>', views.delete_request, name="delete_request"),
+    path('add-yap/<int:request_id>', views.add_yap, name="add_yap"),
+    path('review-reports', views.all_reports, name="all_reports"),
+    path('delete-report/<int:report_id>', views.delete_report, name="delete_report"),
+    
 ]

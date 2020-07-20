@@ -41,84 +41,101 @@
             </div>
         </nav>
 
-        {% if logged_user %}
         <div class="container-fluid mt-4">
             <div class="row d-flex justify-content-center" id="yap_request">
                 <div class="col-md-4">
-                    <h3 class="mb-4">Request a YAP to be added</h2>
-                    <form action="{% url 'contribute' %}" method="POST">
+                    <h3 class="mb-4">Add YAP</h2>
+                    <form action="{% url 'add_yap' request.id %}" method="POST">
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="name">Program Name</label>
-                            <input type="text" name="name" id="name" class="form-control" placeholder="(Required)" required>
+                            <input type="text" name="name" id="name" class="form-control" value="{{request.name}}">
                         </div>
                         <div class="form-group">
-                            <select class="custom-select" name="category" required>
-                                <option selected="">Select a category</option>
-                                <option value="summer">Summer YAP</option>
-                                <option value="residency">Residency YAP</option>
-                            </select>
+                            <label for="category">Category</label>
+                            <input type="text" name="category" id="category" class="form-control" value="{{request.category}}">
                         </div>
                         <div class="form-group">
                             <label for="stipend">Weekly Stipend</label>
-                            <input type="text" name="weekly_stipend" id="stipend" class="form-control" placeholder="(optional)">
+                            <input type="text" name="weekly_stipend" id="stipend" class="form-control" value="{{request.weekly_stipend}}">
                         </div>
                         <div class="form-group row">
                             <div class="col-4">
                                 <label for="min_age">Minimum Age</label>
-                                <input type="text" name = "min_age" id=min_age class="form-control" placeholder="(optional)">
+                                <input type="text" name = "min_age" id=min_age class="form-control" value={{request.minimum_age}}>
                             </div>
                             <div class="col-4">
                                 <label for="max_age">Maximum Age</label>
-                                <input type="text" name = "max_age" id=min_age class="form-control" placeholder="(optional)">
+                                <input type="text" name = "max_age" id=min_age class="form-control" value={{request.maximum_age}}>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="">Select all that apply:</label>
                             <div class="row d-flex justify-content-around">
                                 <div class="form-group text-center" >
+                                    {% if request.housing %}
+                                    <input type="checkbox" value="housing" name="housing" checked>
+                                    {% else %}
                                     <input type="checkbox" value="housing" name="housing">
+                                    {% endif %}
                                     <br>
                                     <label for="housing">Housing</label>
                                 </div>
                                 <div class="form-group text-center">
+                                    {% if request.benefits %}
+                                    <input type="checkbox" value="benefits" name="benefits" checked>
+                                    {% else %}
                                     <input type="checkbox" value="benefits" name="benefits">
+                                    {% endif %}
                                     <br>
-                                    <label for="Benefits">Benefits</label>
+                                    <label for="benefits">Benefits</label>
                                 </div>
                                 <div class="form-group text-center">
+                                    {% if request.travel_stipend %}
+                                    <input type="checkbox" value="travel_stipend" name="travel_stipend" checked>
+                                    {% else %}
                                     <input type="checkbox" value="travel_stipend" name="travel_stipend">
+                                    {% endif %}
                                     <br>
                                     <label for="travel_stipend">Travel Stipend</label>
                                 </div>
                                 <div class="form-group text-center">
+                                    {% if request.agma %}
+                                    <input type="checkbox" value="agma" name="agma" checked>
+                                    {% else %}
                                     <input type="checkbox" value="agma" name="agma">
+                                    {% endif %}
                                     <br>
                                     <label for="agma">AGMA</label>
                                 </div>
                             </div>
+                            <div>
+                                <label for="description">Description</label>
+                                <textarea name="description" class="w-100" id="description" rows="5" style="resize: none;"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="website">Website</label>
+                                    <input type="text" name="website" id="website" class="form-control">
+                                </div>
+                                <div class="col-6">
+                                    <label for="logo">Logo</label>
+                                    <input type="text" name="logo" id="logo" class="form-control">
+                                </div>
+                            </div>
                         </div>
                         <div class="text-right mt-3">
-                            <input type="submit"class="btn btn-custom" value="Request YAP">
+                            <input type="submit"class="btn btn-custom" value="Add YAP">
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        {% else %}
-        <div class="container-fluid mt-4">
-            <div class="row d-flex justify-content-center" id="report">
-                <div class="col-md-4">
-                    <h3 class="mb-4"><a href="{% url 'login' %}">Please <span class="text-info">login</span> to add a YAP</a></h2>
-                </div>
-            </div>
-        </div>
-        {% endif %}
 
 
         <div class="container-fluid mt-5" style="background-color:#2B2D2F;">
             <div class="row d-flex justify-content-start">
-                <div class="col-md-3">
+                <div class="col-md-3 text">
                     <ul class="list-unstyled mt-2">
                         <li><a href="{% url 'index' %}" class="text-light"><small>Index</small></a></li>
                         <li><a href="{% url 'about' %}" class="text-light"><small>About</small></a></li>
@@ -126,7 +143,7 @@
                         <li><a href="{% url 'privacy_policy' %}" class="text-light"><small>Privacy Policy</small></a></li>
                     </ul>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 text">
                     <ul class="list-unstyled mt-2">
                         <li><a href="{% url 'list' %}" class="text-light"><small>The List</small></a></li>
                         <li><a href="{% url 'login' %}" class="text-light"><small>Log In</small></a></li>
@@ -135,7 +152,7 @@
                     </ul>
                 </div>
                 {% if logged_user.user_level == 9%}
-                <div class="col-md-3">
+                <div class="col-md-3 text">
                     <ul class="list-unstyled mt-2">
                         <li><a href="{% url 'requests' %}" class="text-light"><small>YAP Requests</small></a></li>
                         <li><a href="{% url 'all_reports' %}" class="text-light"><small>Review Reports</small></a></li>
@@ -163,19 +180,6 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
 
-    <script>
-        $('form').submit(function(e){
-            e.preventDefault()
-            
-            $.post({
-                url: $(this).attr('action'),
-                data: $(this).serialize(),
-                success: function(serverResponse){
-                    $('#yap_request').html(serverResponse)
-                }
-            })
-        })
-    </script>
 
 </body>
 </html>

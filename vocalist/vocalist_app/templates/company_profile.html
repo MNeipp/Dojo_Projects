@@ -77,7 +77,9 @@
                         </li>
                         <ul class="mb-2 list-unstyled">
                             <h5>
-                                {% if company.maximum_age %}
+                                {% if company.maximum_age == -1 %}
+                                <li class="font-weight-bold">None</li>
+                                {% elif company.maximum_age %}
                                 <li class="font-weight-bold">{{company.minimum_age}} - {{company.maximum_age}}</li>
                                 {% else %}
                                 <li class="font-weight-bold">None</li>
@@ -310,7 +312,7 @@
                 {% csrf_token %}
                 <div class="row">
                     <div class="col-md-2 d-flex flex-column justify-content-between">
-                        <div class="form-check form-check-inline ml-5">
+                        <div class="form-check form-check-inline order-xsm-1">
                             <input type="radio" name="rating" value=0 class="form-check-input" style="display:none" checked>
                             <input type="radio" name="rating" value=1 class="form-check-input" style="display:none">
                             <i class="fa fa-star-o star text-danger"></i>
@@ -332,8 +334,8 @@
                         </p>
                         {% endfor %}
                         {% endif %}
-                        <input type="submit" value="Submit Review" class="btn btn-custom" form="review-form">
-                        <div class="form-group">
+                        <input type="submit" value="Submit Review" class="btn btn-custom order-md-2 my-1" form="review-form">
+                        <div class="form-group order-md-3 order-sm-4">
                             <label for="anonymous">Review anonymously</label>
                             {% if logged_user.anonymous %}
                             <input type="checkbox" name="anonymous" id="anonymous" checked>
@@ -342,11 +344,11 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-md-10 order-md-4 order-first">
                         <textarea name="content" id="" rows="5" placeholder="Review this company (optional)"
                             style="resize: none;" class="w-100"></textarea>
                     </div>
-                    <hr class="border border-grey w-100">
+                    <hr class="border border-grey w-100 order-5">
                 </div>
             </form>
             {% else %}
@@ -367,14 +369,22 @@
                         <li><a href="{% url 'privacy_policy' %}" class="text-light"><small>Privacy Policy</small></a></li>
                     </ul>
                 </div>
-                <div class="col-md-4 text">
+                <div class="col-md-3 text">
                     <ul class="list-unstyled mt-2">
                         <li><a href="{% url 'list' %}" class="text-light"><small>The List</small></a></li>
                         <li><a href="{% url 'login' %}" class="text-light"><small>Log In</small></a></li>
                         <li><a href="{% url 'register' %}" class="text-light"><small>Register</small></a></li>
-                        <li><a href="" class="text-light"><small>Contribute</small></a></li>
+                        <li><a href="{% url 'contribute' %}" class="text-light"><small>Contribute</small></a></li>
                     </ul>
                 </div>
+                {% if logged_user.user_level == 9%}
+                <div class="col-md-3 text">
+                    <ul class="list-unstyled mt-2">
+                        <li><a href="{% url 'requests' %}" class="text-light"><small>YAP Requests</small></a></li>
+                        <li><a href="{% url 'all_reports' %}" class="text-light"><small>Review Reports</small></a></li>
+                    </ul>
+                </div>
+                {% endif %}
             </div>
             <div class="row">
                 <hr class="border border-light w-100 mb-0 mt-0" >

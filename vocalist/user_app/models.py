@@ -54,6 +54,12 @@ class User(models.Model):
     password = models.CharField(max_length=255)
     image = models.ImageField(default='profile_pictures/default.png', upload_to='profile_pictures')
     anonymous = models.BooleanField(default = True)
+    user_level_choices =[
+        (0,"Normal"),
+        (9,"Admin")
+    ]
+    user_level = models.IntegerField(choices=user_level_choices, default=0)
+    user_level = models.IntegerField(default = 0)
     created_at = models.DateTimeField(auto_now_add=True)
     edited_at = models.DateTimeField(auto_now=True)
     objects = userManager()

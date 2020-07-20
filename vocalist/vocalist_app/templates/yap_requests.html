@@ -14,7 +14,6 @@
         href="https://fonts.googleapis.com/css2?family=Parisienne&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
         rel="stylesheet">
     <script src="https://kit.fontawesome.com/0eb52090db.js" crossorigin="anonymous"></script>
-
 </head>
 
 <body>
@@ -29,7 +28,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav ml-auto">
-                        <a class="nav-link font-weight-bold active disabled" href="{% url 'about' %}">About</a>
+                        <a class="nav-link font-weight-bold" href="{% url 'about' %}">About</a>
                         <a class="nav-link font-weight-bold" href="{% url 'list' %}">The List</a>
                         {% if logged_user %}
                         <a class="nav-link font-weight-bold" href="{% url 'user_profile' %}">Profile</a>
@@ -42,25 +41,25 @@
             </div>
         </nav>
 
-        <div class="container-fluid">
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-6 border-right mt-2 mr-5">
-                    <h1 class="display-4 mb-4 ml-3 text-danger">About Voca<span class="text-dark">List</span></h1>
-                    <p style="text-indent: 40px;" class="my-3">The VocaList was created by young artists, for young artists. The goal is to provide a safe resource for singers to share their experiences, positive and negative, with Young Artist Programs.</p>
-                    <p style="text-indent: 40px;" class="my-3">The VocaList allows artists to review YAPs they have participated in, with the option to post their reviews anonymously. Without the fear of hindering their careers, we encourage artists to be honest and fair in their reviews.</p>
-                    <p style="text-indent: 40px;" class="my-3">In the future, we hope to expand the VocaList to include Pay-to-Sing training programs, as well as University and Conservatory programs. </p>
-                </div>
-                <div class="col-md-5 mt-2 pl-0">
-                    <h1 class="display-4 mb-4 ml-3 text-danger">Contribute</h1>
-                    <p style="text-indent: 40px;" class="my-3">If there is a YAP that you would like to see be included in the VocaList, please provide any and all information you may have by clicking <u><a href="{% url 'contribute' %}" class="text-info font-weight-bold">here</a></u>.</p>
-                    <p style="text-indent: 40px;" class="my-3">The VocaList is and always will be free. However, if you find this resource useful and would like to help pay for server costs, you may do so below. Donations will only be used for maintenance of the VocaList. Thank you for your support!</p>
-                    <div class="text-center">
-
-                        <a href="{% url 'donate' %}" class="btn btn-custom">Click Here to Donate!</a>
-                    </div>
-                </div>
-            </div>
+        <div class="container-fluid mt-4">
+            <table class="table-striped table table-bordered w-25 mx-auto">
+                <thead>
+                    <tr>
+                        <th>Program Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in requests %}
+                    <tr>
+                        <td><a href="{% url 'add_yap' request.id %}">{{request.name}}</a></td>
+                        <td><a href="{% url 'delete_request' request.id %}">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
+
         <div class="container-fluid mt-5" style="background-color:#2B2D2F;">
             <div class="row d-flex justify-content-start">
                 <div class="col-md-3 text">
@@ -97,6 +96,17 @@
                 </div>
             </div>
         </div>
+
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+
 </body>
 </html>

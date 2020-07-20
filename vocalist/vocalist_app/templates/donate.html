@@ -67,7 +67,7 @@
 
         <div class="container-fluid mt-5" style="background-color:#2B2D2F;">
             <div class="row d-flex justify-content-start">
-                <div class="col-md-3 text">
+                <div class="col-md-3">
                     <ul class="list-unstyled mt-2">
                         <li><a href="{% url 'index' %}" class="text-light"><small>Index</small></a></li>
                         <li><a href="{% url 'about' %}" class="text-light"><small>About</small></a></li>
@@ -76,14 +76,22 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-4 text">
+                <div class="col-md-3">
                     <ul class="list-unstyled mt-2">
                         <li><a href="{% url 'list' %}" class="text-light"><small>The List</small></a></li>
                         <li><a href="{% url 'login' %}" class="text-light"><small>Log In</small></a></li>
                         <li><a href="{% url 'register' %}" class="text-light"><small>Register</small></a></li>
-                        <li><a href="" class="text-light"><small>Contribute</small></a></li>
+                        <li><a href="{% url 'contribute' %}" class="text-light"><small>Contribute</small></a></li>
                     </ul>
                 </div>
+                {% if logged_user.user_level == 9%}
+                <div class="col-md-3">
+                    <ul class="list-unstyled mt-2">
+                        <li><a href="{% url 'requests' %}" class="text-light"><small>YAP Requests</small></a></li>
+                        <li><a href="{% url 'all_reports' %}" class="text-light"><small>Review Reports</small></a></li>
+                    </ul>
+                </div>
+                {% endif %}
             </div>
             <div class="row">
                 <hr class="border border-light w-100 mb-0 mt-0">

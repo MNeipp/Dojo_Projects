@@ -98,9 +98,33 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid d-flex align-items-center justify-content-center flex-wrap" style="background-color:#2B2D2F; height:125px">
-            <hr class="border border-light w-100 mt-5 mb-0" >
-            <small class="text-light mb-3"> &copy; Mason Gates</small>
+        <div class="container-fluid mt-5" style="background-color:#2B2D2F;">
+            <div class="row d-flex justify-content-start">
+                <div class="col-md-3 text">
+                    <ul class="list-unstyled mt-2">
+                        <li><a href="{% url 'index' %}" class="text-light"><small>Index</small></a></li>
+                        <li><a href="{% url 'about' %}" class="text-light"><small>About</small></a></li>
+                        <li><a href="{% url 'terms_of_use' %}" class="text-light"><small>Terms of Use</small></a></li>
+                        <li><a href="{% url 'privacy_policy' %}" class="text-light"><small>Privacy Policy</small></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 text">
+                    <ul class="list-unstyled mt-2">
+                        <li><a href="{% url 'list' %}" class="text-light"><small>The List</small></a></li>
+                        <li><a href="{% url 'login' %}" class="text-light"><small>Log In</small></a></li>
+                        <li><a href="{% url 'register' %}" class="text-light"><small>Register</small></a></li>
+                        <li><a href="{% url 'contribute' %}" class="text-light"><small>Contribute</small></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <hr class="border border-light w-100 mb-0 mt-0" >
+            </div>
+            <div class="row d-flex justify-content-start">
+                <div class="col-md-2 mb-2 mt-2">
+                    <small class="text-light"> &copy; Mason Gates</small>
+                </div>
+            </div>
         </div>
     </div>
 

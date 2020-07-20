@@ -132,6 +132,30 @@ def report(request, review_id):
         }
         return render(request, "report.html", context)
 
+def all_reports(request):
+    if 'user_id' not in request.session:
+        return redirect(reverse('index'))
+    user = User.objects.get(id=request.session['user_id'])
+    if user.user_level != 9:
+        return redirect(reverse('index'))
+    else:
+        context={
+            'logged_user': user,
+            'reports': Report.objects.all()
+        }
+        return render(request, 'all_reports.html', context)
+
+def delete_report(request, report_id):
+    if 'user_id' not in request.session:
+        return redirect(reverse('index'))
+    user = User.objects.get(id=request.session['user_id'])
+    if user.user_level != 9:
+        return redirect(reverse('index'))
+    else:
+        to_delete = Report.objects.get(id=report_id)
+        to_delete.delete()
+        return redirect(reverse('all_reports'))
+
 def contribute(request):
     if request.method == "POST":
         name = request.POST['name']
@@ -167,5 +191,81 @@ def contribute(request):
         }
         return render(request, "contribute.html", context)
 
-# def donate(request):
-#     return render(request, "donate.html")
+def yap_requests(request):
+    if 'user_id' not in request.session:
+        return redirect(reverse('index'))
+    user = User.objects.get(id=request.session['user_id'])
+    if user.user_level != 9:
+        return redirect(reverse('index'))
+    else:
+        context={
+            'logged_user': user,
+            'requests': YAPRequest.objects.all()
+        }
+        return render(request, 'YAP_requests.html', context)
+
+def delete_request(request, request_id):
+    if 'user_id' not in request.session:
+        return redirect(reverse('index'))
+    user = User.objects.get(id=request.session['user_id'])
+    if user.user_level != 9:
+        return redirect(reverse('index'))
+    else:
+        to_delete = YAPRequest.objects.get(id=request_id)
+        to_delete.delete()
+        return redirect(reverse('requests'))
+
+def add_yap(request, request_id):
+    if request.method == "POST":
+        name = request.POST['name']
+        weekly_stipend = request.POST['weekly_stipend']
+        category = request.POST['category']
+        description = request.POST['description']
+        website = request.POST['website']
+        logo = request.POST['logo']
+        if 'agma' in request.POST:
+            agma = True
+        else:
+            agma = False
+        if 'travel_stipend' in request.POST:
+            travel_stipend = True
+        else:
+            travel_stipend = False
+        if 'benefits' in request.POST:
+            benefits = True
+        else:
+            benefits = False
+        if 'housing' in request.POST:
+            housing = True
+        else:
+            housing = False
+        if request.POST['min_age'] == 'None':
+            min_age = -1
+        else:
+            min_age = request.POST['min_age']
+        if request.POST['max_age'] == 'None':
+            max_age = -1
+        else:
+            max_age = request.POST['max_age']
+        website = request.POST['website']
+        logo = request.POST['logo']
+        
+        Company.objects.create(name=name, weekly_stipend=weekly_stipend, category=category, agma=agma, housing=housing, travel_stipend=travel_stipend, benefits=benefits, description=description, website=website, logo=logo, minimum_age=min_age, maximum_age=max_age)
+        filled_request = YAPRequest.objects.get(id=request_id)
+        filled_request.delete()
+        return redirect(reverse('requests'))
+
+    if 'user_id' not in request.session:
+        return redirect(reverse('index'))
+    user = User.objects.get(id=request.session['user_id'])
+    if user.user_level != 9:
+        return redirect(reverse('index'))
+    else:
+        context={
+            'logged_user':user,
+            'request': YAPRequest.objects.get(id=request_id)
+        }
+        return render(request, 'add_yap.html', context)
+
+def donate(request):
+    return render(request, "donate.html")
