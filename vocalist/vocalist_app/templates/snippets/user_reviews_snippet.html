@@ -14,21 +14,37 @@
             {% elif review.rating == 5 %}
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
             {% endif %}
-            {% if review.dateEdited != review.datePosted %}
-            <small><em class="text-dark font-weight-bold">edited {{review.dateEdited}}</em></small>
-             {% else %}
-            <small><em class="text-dark font-weight-bold">{{review.datePosted}}</em></small>
-            {% endif %}            
-        </h6>
+                {% if review.datePosted != review.dateEdited %}
+                <small><em class="text-dark font-weight-bold">edited {{review.dateEdited}}</em></small></p>
+                 {% else %}
+                <small><em class="text-dark font-weight-bold">{{review.datePosted}}</em></small></p>
+                {% endif %}
+            </h6>
         <p>{{review.content}}</p>
+        <form action="{% url 'edit_review' review.id %}" method="post" style="display:none" class="edit_review_form">
+            {% csrf_token %}
+            <h5>{{review.company.name}}</h5>
+            <div class="form-check form-check-inline mb-3 text-danger">
+                <input type="radio" name="rating" value=0 class="form-check-input" style="display:none" checked>
+                <input type="radio" name="rating" value=1 class="form-check-input" style="display:none">
+                <i class="fa fa-star-o star text-danger"></i>
+                <input type="radio" name="rating" value=2 class="form-check-input" style="display:none">
+                <i class="fa fa-star-o star text-danger"></i>
+                <input type="radio" name="rating" value=3 class="form-check-input" style="display:none">
+                <i class="fa fa-star-o star text-danger"></i>
+                <input type="radio" name="rating" value=4 class="form-check-input" style="display:none">
+                <i class="fa fa-star-o star text-danger"></i>
+                <input type="radio" name="rating" value=5 class="form-check-input" style="display:none">
+                <i class="fa fa-star-o star text-danger"></i>
+            </div>
+            <textarea name="content" rows="5" style="resize: none;" class="w-100">{{review.content}}</textarea>
+            <input type="submit" value="Save Edits" class="btn btn-custom">
+        </form>
         <form action="{% url 'delete_review' review.id %}" method="POST" class="d-flex justify-content-start">
             {% csrf_token %}
-            <u><input type="submit" value="Delete" class="btn btn-link"></u>
+            <input type="submit" value="Delete" class="btn btn-link">
             <span class="text-info align-self-center">|</span>
-            <u><input type="submit" value="Edit" class="btn btn-link" form="edit_review_{{review.id}}"></u>
-        </form>
-        <form action="{% url 'edit_review' review.id %}" method="POST" id="edit_review_{{review.id}}">
-            {% csrf_token %}
+            <input type="button" value="Edit" class="btn btn-link edit_review">
         </form>
     </div>
     <hr class="border border-grey w-100">

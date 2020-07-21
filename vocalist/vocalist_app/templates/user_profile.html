@@ -259,7 +259,7 @@
             $(this).parent().siblings('.edit_review_form').show()
 
         })
-        $('.star').click(function (e) {
+        $('#user_reviews').on('click', '.star', function (e) {
             var unchecked = 'fa fa-star-o text-danger star'
             var checked = 'fa fa-star star text-danger'
             $(this).attr('class', checked);
