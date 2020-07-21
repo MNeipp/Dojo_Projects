@@ -9,12 +9,11 @@ class CompanyFilter(django_filters.FilterSet):
     housing = django_filters.CharFilter(lookup_expr="icontains")
     travel_stipend = django_filters.CharFilter(lookup_expr="icontains")
     benefits = django_filters.CharFilter(lookup_expr="icontains")
-
+    
     o = django_filters.OrderingFilter(
         fields=(
             ('name', 'name'),
             ('weekly_stipend', 'weekly_stipend'),
-            
         ),
     )
 

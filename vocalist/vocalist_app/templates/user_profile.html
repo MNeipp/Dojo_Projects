@@ -150,11 +150,11 @@
                         {% elif review.rating == 5 %}
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
                         {% endif %}
-                        {% if review.updated_at %}
-                            <small><em class="text-dark font-weight-bold">updated on {{review.dateEdited}}</em></small>
-                        {% else %}
-                            <small><em class="text-dark font-weight-bold">{{review.datePosted}}</em></small>
-                        {% endif %}
+                            {% if review.datePosted != review.dateEdited %}
+                            <small><em class="text-dark font-weight-bold">edited {{review.dateEdited}}</em></small></p>
+                             {% else %}
+                            <small><em class="text-dark font-weight-bold">{{review.datePosted}}</em></small></p>
+                            {% endif %}
                         </h6>
                     <p>{{review.content}}</p>
                     <form action="{% url 'edit_review' review.id %}" method="post" style="display:none" class="edit_review_form">
