@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse, reverse
 from user_app.models import User
-from .models import Company, Review, Report, YAPRequest
+from .models import Company, Review, Report, YAPRequest, Correction
 from .filters import CompanyFilter
 from django.contrib import messages
 import bcrypt
@@ -48,6 +48,25 @@ def company_profile(request, slug):
             'logged_user': User.objects.get(id=request.session['user_id'])
         }
     return render(request, "company_profile.html", context)
+
+def report_correction(request, slug):
+    if request.method == "POST":
+        user = User.objects.get(id=request.session['user_id'])
+        company = Company.objects.get(slug=slug)
+        Correction.objects.create(user = user, company = company, content = request.POST['content'])
+        return HttpResponse("<h2>Thank you for the information!</h2>")
+    else:
+        if 'user_id' not in request.session:
+            context={
+                "company": Company.objects.get(slug=slug)
+            }
+        else:
+            context={
+                'company': Company.objects.get(slug=slug),
+                'logged_user': User.objects.get(id=request.session['user_id'])
+            }
+        return render(request, 'correction.html', context)
+
 
 def create_review(request, slug):
     if int(request.POST['rating']) < 1  or int(request.POST['rating']) > 5:
@@ -275,3 +294,75 @@ def thank_you(request):
             'logged_user': User.objects.get(id=request.session['user_id'])
         }
         return render(request, "thank_you.html", context)
+
+def all_corrections(request):
+    if 'user_id' not in request.session:
+        return redirect(reverse('index'))
+    user = User.objects.get(id=request.session['user_id'])
+    if user.user_level != 9:
+        return redirect(reverse('index'))
+    else:
+        context={
+            'logged_user': user,
+            'corrections': Correction.objects.all()
+        }
+        return render(request, 'all_corrections.html', context)
+
+def update_yap(request, slug, correction_id):
+    if request.method == "POST":
+        name = request.POST['name']
+        weekly_stipend = request.POST['weekly_stipend']
+        category = request.POST['category']
+        if 'agma' in request.POST:
+            agma = True
+        else:
+            agma = False
+        if 'travel_stipend' in request.POST:
+            travel_stipend = True
+        else:
+            travel_stipend = False
+        if 'benefits' in request.POST:
+            benefits = True
+        else:
+            benefits = False
+        if 'housing' in request.POST:
+            housing = True
+        else:
+            housing = False
+        if request.POST['min_age'] == 'None':
+            min_age = -1
+        else:
+            min_age = request.POST['min_age']
+        if request.POST['max_age'] == 'None':
+            max_age = -1
+        else:
+            max_age = request.POST['max_age']
+        
+        to_correct = Company.objects.filter(slug=slug).update(name=name, weekly_stipend=weekly_stipend, category=category, agma=agma, housing=housing, travel_stipend=travel_stipend, benefits=benefits, minimum_age=min_age, maximum_age=max_age)
+        filled_correction = Correction.objects.get(id=request.POST['correction_id'])
+        filled_correction.delete()
+        return redirect(reverse('all_corrections'))
+
+    if 'user_id' not in request.session:
+        return redirect(reverse('index'))
+    user = User.objects.get(id=request.session['user_id'])
+    if user.user_level != 9:
+        return redirect(reverse('index'))
+    else:
+        context={
+            'logged_user':user,
+            'company': Company.objects.get(slug=slug),
+            'correction': Correction.objects.get(id=correction_id),
+        }
+        return render(request, 'update_yap.html', context)
+
+def delete_correction(request, correction_id):
+    if 'user_id' not in request.session:
+        return redirect(reverse('index'))
+    user = User.objects.get(id=request.session['user_id'])
+    if user.user_level != 9:
+        return redirect(reverse('index'))
+    else:
+        to_delete = Correction.objects.get(id=correction_id)
+        to_delete.delete()
+        return redirect(reverse('all_corrections'))

@@ -79,3 +79,10 @@ class YAPRequest(models.Model):
     maximum_age = models.CharField(max_length = 3, blank=True, null =True)
     created_at = models.DateField(auto_now_add = True)
     updated_at = models.DateField(auto_now= True)
+
+class Correction(models.Model):
+    content = models.TextField()
+    company = models.ForeignKey(Company, related_name = "has_corrections", on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, related_name="has_corrected", on_delete=models.CASCADE)
+    created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now= True)

@@ -45,13 +45,14 @@
         <div class="container-fluid mt-4">
             <div class="row d-flex justify-content-center" id="report">
                 <div class="col-md-4">
-                    <h3 class="mb-4">Report Review</h2>
-                    <form action="{% url 'report' review.id %}" method="POST">
+                    <h4 class="mb-4">Correct information for</h4>
+                    <h3 class="mb-4 text-weight-bold ">{{company.name}}</h3>
+                    <form action="{% url 'correction' company.slug %}" method="POST">
                         {% csrf_token %}
-                        <textarea name="content" class="w-100" rows="5" placeholder="Why is this review being reported?" style="resize:none" required></textarea>
-                        <input type="hidden" name="reporter_id" value={{logged_user.id}}>
+                        <textarea name="content" class="w-100" rows="5" placeholder="What information needs to be corrected?" style="resize:none" required></textarea>
+                        <input type="hidden" name="user_id" value={{logged_user.id}}>
                         <div class="text-right mt-3">
-                            <input type="submit"class="btn btn-custom" value="Report Review">
+                            <input type="submit"class="btn btn-custom" value="Report Correction">
                         </div>
                     </form>
                 </div>
@@ -60,8 +61,8 @@
         {% else %}
         <div class="container-fluid mt-4">
             <div class="row d-flex justify-content-center" id="report">
-                <div class="col-md-4">
-                    <h3 class="mb-4"><a href="{% url 'login' %}">Please <span class="text-info">login</span> to file a report</a></h2>
+                <div class="col-md-5">
+                    <h3 class="mb-4"><a href="{% url 'login' %}">Please <span class="text-info">login</span> to make a correction</a></h2>
                 </div>
             </div>
         </div>

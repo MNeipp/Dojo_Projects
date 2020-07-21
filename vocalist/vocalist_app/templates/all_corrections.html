@@ -41,36 +41,32 @@
             </div>
         </nav>
 
-        {% if logged_user %}
         <div class="container-fluid mt-4">
-            <div class="row d-flex justify-content-center" id="report">
-                <div class="col-md-4">
-                    <h3 class="mb-4">Report Review</h2>
-                    <form action="{% url 'report' review.id %}" method="POST">
-                        {% csrf_token %}
-                        <textarea name="content" class="w-100" rows="5" placeholder="Why is this review being reported?" style="resize:none" required></textarea>
-                        <input type="hidden" name="reporter_id" value={{logged_user.id}}>
-                        <div class="text-right mt-3">
-                            <input type="submit"class="btn btn-custom" value="Report Review">
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <table class="table-striped table table-bordered w-50 mx-auto">
+                <thead>
+                    <tr>
+                        <th>Company</th>
+                        <th>Correction</th>
+                        <th>Reported by</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for correction in corrections %}
+                    <tr>
+                        <td>{{correction.company.name}}</td>
+                        <td>{{correction.content}}</td>
+                        <td>{{correction.user.first_name}} {{correction.user.last_name}} {{correction.user.email}}</td>
+                        <td><a href="{% url 'update_yap' correction.company.slug correction.id %}">Update</a>|<a href="{% url 'delete_correction' correction.id %}">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-        {% else %}
-        <div class="container-fluid mt-4">
-            <div class="row d-flex justify-content-center" id="report">
-                <div class="col-md-4">
-                    <h3 class="mb-4"><a href="{% url 'login' %}">Please <span class="text-info">login</span> to file a report</a></h2>
-                </div>
-            </div>
-        </div>
-        {% endif %}
-
 
         <div class="container-fluid mt-5" style="background-color:#2B2D2F;">
             <div class="row d-flex justify-content-start">
-                <div class="col-md-3">
+                <div class="col-md-3 text">
                     <ul class="list-unstyled mt-2">
                         <li><a href="{% url 'index' %}" class="text-light"><small>Index</small></a></li>
                         <li><a href="{% url 'about' %}" class="text-light"><small>About</small></a></li>
@@ -78,7 +74,7 @@
                         <li><a href="{% url 'privacy_policy' %}" class="text-light"><small>Privacy Policy</small></a></li>
                     </ul>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 text">
                     <ul class="list-unstyled mt-2">
                         <li><a href="{% url 'list' %}" class="text-light"><small>The List</small></a></li>
                         <li><a href="{% url 'login' %}" class="text-light"><small>Log In</small></a></li>
@@ -87,7 +83,7 @@
                     </ul>
                 </div>
                 {% if logged_user.user_level == 9%}
-                <div class="col-md-3">
+                <div class="col-md-3 text">
                     <ul class="list-unstyled mt-2">
                         <li><a href="{% url 'requests' %}" class="text-light"><small>YAP Requests</small></a></li>
                         <li><a href="{% url 'all_reports' %}" class="text-light"><small>Review Reports</small></a></li>
@@ -116,19 +112,6 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
 
-    <script>
-        $('form').submit(function(e){
-            e.preventDefault()
-            
-            $.post({
-                url: $(this).attr('action'),
-                data: $(this).serialize(),
-                success: function(serverResponse){
-                    $('#report').html(serverResponse)
-                }
-            })
-        })
-    </script>
 
 </body>
 </html>

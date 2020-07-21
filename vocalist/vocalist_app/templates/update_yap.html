@@ -41,44 +41,97 @@
             </div>
         </nav>
 
-        {% if logged_user %}
         <div class="container-fluid mt-4">
-            <div class="row d-flex justify-content-center" id="report">
+            <div class="row d-flex justify-content-center" id="update_yap">
                 <div class="col-md-4">
-                    <h3 class="mb-4">Report Review</h2>
-                    <form action="{% url 'report' review.id %}" method="POST">
+                    <h3 class="mb-4">Add YAP</h2>
+                    <form action="{% url 'update_yap' company.slug correction.id %}" method="POST">
                         {% csrf_token %}
-                        <textarea name="content" class="w-100" rows="5" placeholder="Why is this review being reported?" style="resize:none" required></textarea>
-                        <input type="hidden" name="reporter_id" value={{logged_user.id}}>
+                        <div class="form-group">
+                            <label for="name">Program Name</label>
+                            <input type="text" name="name" id="name" class="form-control" value="{{company.name}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <input type="text" name="category" id="category" class="form-control" value="{{company.category}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="stipend">Weekly Stipend</label>
+                            <input type="text" name="weekly_stipend" id="stipend" class="form-control" value="{{company.weekly_stipend}}">
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <label for="min_age">Minimum Age</label>
+                                <input type="text" name = "min_age" id=min_age class="form-control" value={{company.minimum_age}}>
+                            </div>
+                            <div class="col-4">
+                                <label for="max_age">Maximum Age</label>
+                                <input type="text" name = "max_age" id=min_age class="form-control" value={{company.maximum_age}}>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Select all that apply:</label>
+                            <div class="row d-flex justify-content-around">
+                                <div class="form-group text-center" >
+                                    {% if company.housing %}
+                                    <input type="checkbox" value="housing" name="housing" checked>
+                                    {% else %}
+                                    <input type="checkbox" value="housing" name="housing">
+                                    {% endif %}
+                                    <br>
+                                    <label for="housing">Housing</label>
+                                </div>
+                                <div class="form-group text-center">
+                                    {% if company.benefits %}
+                                    <input type="checkbox" value="benefits" name="benefits" checked>
+                                    {% else %}
+                                    <input type="checkbox" value="benefits" name="benefits">
+                                    {% endif %}
+                                    <br>
+                                    <label for="benefits">Benefits</label>
+                                </div>
+                                <div class="form-group text-center">
+                                    {% if company.travel_stipend %}
+                                    <input type="checkbox" value="travel_stipend" name="travel_stipend" checked>
+                                    {% else %}
+                                    <input type="checkbox" value="travel_stipend" name="travel_stipend">
+                                    {% endif %}
+                                    <br>
+                                    <label for="travel_stipend">Travel Stipend</label>
+                                </div>
+                                <div class="form-group text-center">
+                                    {% if company.agma %}
+                                    <input type="checkbox" value="agma" name="agma" checked>
+                                    {% else %}
+                                    <input type="checkbox" value="agma" name="agma">
+                                    {% endif %}
+                                    <br>
+                                    <label for="agma">AGMA</label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="text-right mt-3">
-                            <input type="submit"class="btn btn-custom" value="Report Review">
+                            <input type="submit"class="btn btn-custom" value="Update YAP">
+                            <input type="hidden" name="correction_id" value={{correction.id}}>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        {% else %}
-        <div class="container-fluid mt-4">
-            <div class="row d-flex justify-content-center" id="report">
-                <div class="col-md-4">
-                    <h3 class="mb-4"><a href="{% url 'login' %}">Please <span class="text-info">login</span> to file a report</a></h2>
-                </div>
-            </div>
-        </div>
-        {% endif %}
 
 
         <div class="container-fluid mt-5" style="background-color:#2B2D2F;">
             <div class="row d-flex justify-content-start">
-                <div class="col-md-3">
+                <div class="col-md-3 text">
                     <ul class="list-unstyled mt-2">
                         <li><a href="{% url 'index' %}" class="text-light"><small>Index</small></a></li>
                         <li><a href="{% url 'about' %}" class="text-light"><small>About</small></a></li>
                         <li><a href="{% url 'terms_of_use' %}" class="text-light"><small>Terms of Use</small></a></li>
                         <li><a href="{% url 'privacy_policy' %}" class="text-light"><small>Privacy Policy</small></a></li>
+                        <li><a href="{% url 'all_corrections' %}" class="text-light"><small>Correction Reports</small></a></li>
                     </ul>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 text">
                     <ul class="list-unstyled mt-2">
                         <li><a href="{% url 'list' %}" class="text-light"><small>The List</small></a></li>
                         <li><a href="{% url 'login' %}" class="text-light"><small>Log In</small></a></li>
@@ -87,11 +140,10 @@
                     </ul>
                 </div>
                 {% if logged_user.user_level == 9%}
-                <div class="col-md-3">
+                <div class="col-md-3 text">
                     <ul class="list-unstyled mt-2">
                         <li><a href="{% url 'requests' %}" class="text-light"><small>YAP Requests</small></a></li>
                         <li><a href="{% url 'all_reports' %}" class="text-light"><small>Review Reports</small></a></li>
-                        <li><a href="{% url 'all_corrections' %}" class="text-light"><small>Correction Reports</small></a></li>
                     </ul>
                 </div>
                 {% endif %}
@@ -116,19 +168,6 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
 
-    <script>
-        $('form').submit(function(e){
-            e.preventDefault()
-            
-            $.post({
-                url: $(this).attr('action'),
-                data: $(this).serialize(),
-                success: function(serverResponse){
-                    $('#report').html(serverResponse)
-                }
-            })
-        })
-    </script>
 
 </body>
 </html>
