@@ -267,5 +267,11 @@ def add_yap(request, request_id):
         }
         return render(request, 'add_yap.html', context)
 
-def donate(request):
-    return render(request, "donate.html")
+def thank_you(request):
+    if 'user_id' not in request.session:
+        return render(request, "thank_you.html")
+    else:
+        context={
+            'logged_user': User.objects.get(id=request.session['user_id'])
+        }
+        return render(request, "thank_you.html", context)

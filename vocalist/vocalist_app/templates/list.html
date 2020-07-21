@@ -112,26 +112,76 @@
                             <span class="font-weight-bold text-danger" data-toggle="tooltip" data-placement="bottom" title="Average Rating = {{company.averageRating}}"><i class="fas fa-star"></i><i
                                     class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i
                                     class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                                    <small class='ml-2'>
+                                        <em class="text-dark">
+                                        {{company.has_reviews.all.count}}
+                                        {% if company.has_reviews.all.count == 1 %}
+                                        review
+                                        {% else %}
+                                        reviews
+                                        {% endif %}
+                                        </em>
+                                    </small>
                             </span>
                             {% elif company.averageRating >= 1.5 and company.averageRating < 2 %}
                             <span class="font-weight-bold text-danger" data-toggle="tooltip" data-placement="bottom" title="Average Rating = {{company.averageRating}}"><i class="fas fa-star"></i><i
                                     class="fas fa-star-half-alt"></i><i class="fa fa-star-o"></i><i
                                     class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                                    <small class='ml-2'>
+                                        <em class="text-dark">
+                                        {{company.has_reviews.all.count}}
+                                        {% if company.has_reviews.all.count == 1 %}
+                                        review
+                                        {% else %}
+                                        reviews
+                                        {% endif %}
+                                        </em>
+                                    </small>
                             </span>
                             {% elif company.averageRating >= 2.0 and company.averageRating < 2.5 %}
                             <span class="font-weight-bold text-danger" data-toggle="tooltip" data-placement="bottom" title="Average Rating = {{company.averageRating}}"><i class="fas fa-star"></i><i
                                     class="fas fa-star"></i><i class="fa fa-star-o"></i> <i
                                     class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                                    <small class='ml-2'>
+                                        <em class="text-dark">
+                                        {{company.has_reviews.all.count}}
+                                        {% if company.has_reviews.all.count == 1 %}
+                                        review
+                                        {% else %}
+                                        reviews
+                                        {% endif %}
+                                        </em>
+                                    </small>
                             </span>
                             {% elif company.averageRating >= 2.5 and company.averageRating < 3 %}
                             <span class="font-weight-bold text-danger" data-toggle="tooltip" data-placement="bottom" title="Average Rating = {{company.averageRating}}"><i class="fas fa-star"></i><i
                                     class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i
                                     class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                                    <small class='ml-2'>
+                                        <em class="text-dark">
+                                        {{company.has_reviews.all.count}}
+                                        {% if company.has_reviews.all.count == 1 %}
+                                        review
+                                        {% else %}
+                                        reviews
+                                        {% endif %}
+                                        </em>
+                                    </small>
                             </span>
                             {% elif company.averageRating >= 3.0 and company.averageRating < 3.5 %}
                             <span class="font-weight-bold text-danger" data-toggle="tooltip" data-placement="bottom" title="Average Rating = {{company.averageRating}}"><i class="fas fa-star"></i><i
                                     class="fas fa-star" ></i><i class="fas fa-star"></i><i
                                     class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                                    <small class='ml-2'>
+                                        <em class="text-dark">
+                                        {{company.has_reviews.all.count}}
+                                        {% if company.has_reviews.all.count == 1 %}
+                                        review
+                                        {% else %}
+                                        reviews
+                                        {% endif %}
+                                        </em>
+                                    </small>
                             </span>
                             {% elif company.averageRating >= 3.5 and company.averageRating < 4 %}
                             <span class="font-weight-bold text-danger"  data-toggle="tooltip" data-placement="bottom" title="Average Rating = {{company.averageRating}}"><i class="fas fa-star"></i><i
@@ -149,16 +199,46 @@
                             <span class="font-weight-bold text-danger" data-toggle="tooltip" data-placement="bottom" title="Average Rating = {{company.averageRating}}"><i class="fas fa-star"></i><i
                                     class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                                     class="fa fa-star-o"></i>
+                                    <small class='ml-2'>
+                                        <em class="text-dark">
+                                        {{company.has_reviews.all.count}}
+                                        {% if company.has_reviews.all.count == 1 %}
+                                        review
+                                        {% else %}
+                                        reviews
+                                        {% endif %}
+                                        </em>
+                                    </small>
                             </span>
                             {% elif company.averageRating >= 4.5  and company.averageRating < 4.8%}
                             <span class="font-weight-bold text-danger" data-toggle="tooltip" data-placement="bottom" title="Average Rating = {{company.averageRating}}"><i class="fas fa-star"></i><i
                                     class="fas fa-star"></i><i class="fas fa-star"></i> <i
                                     class="fas fa-star"></i><i class="fa fa-star-half-alt"></i>
+                                    <small class='ml-2'>
+                                        <em class="text-dark">
+                                        {{company.has_reviews.all.count}}
+                                        {% if company.has_reviews.all.count == 1 %}
+                                        review
+                                        {% else %}
+                                        reviews
+                                        {% endif %}
+                                        </em>
+                                    </small>
                             </span>
                             {% elif company.averageRating >= 4.8 %}
                             <span class="font-weight-bold text-danger" data-toggle="tooltip" data-placement="bottom" title="Average Rating = {{company.averageRating}}"><i class="fas fa-star"></i><i
                                     class="fas fa-star"></i><i class="fas fa-star"></i> <i
                                     class="fas fa-star"></i><i class="fa fa-star"></i>
+                                    <small class='ml-2'>
+                                        <em class="text-dark">
+                                        {{company.has_reviews.all.count}}
+                                        {% if company.has_reviews.all.count == 1 %}
+                                        review
+                                        {% else %}
+                                        reviews
+                                        {% endif %}
+                                        </em>
+                                    </small>
                             </span>
                             {% else %}
                             {{company.averageRating}}

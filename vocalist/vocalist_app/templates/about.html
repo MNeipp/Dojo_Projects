@@ -55,8 +55,12 @@
                     <p style="text-indent: 40px;" class="my-3">If there is a YAP that you would like to see be included in the VocaList, please provide any and all information you may have by clicking <u><a href="{% url 'contribute' %}" class="text-info font-weight-bold">here</a></u>.</p>
                     <p style="text-indent: 40px;" class="my-3">The VocaList is and always will be free. However, if you find this resource useful and would like to help pay for server costs, you may do so below. Donations will only be used for maintenance of the VocaList. Thank you for your support!</p>
                     <div class="text-center">
-
-                        <a href="{% url 'donate' %}" class="btn btn-custom">Click Here to Donate!</a>
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                            <input type="hidden" name="cmd" value="_s-xclick" />
+                            <input type="hidden" name="hosted_button_id" value="EF25V967CNGJU" />
+                            <input type="submit" value="Click to Donate" class="btn btn-custom">
+                    </form>
+                            
                     </div>
                 </div>
             </div>
