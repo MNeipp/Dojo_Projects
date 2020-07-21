@@ -4,6 +4,7 @@ from .models import Company, Review, Report, YAPRequest, Correction
 from .filters import CompanyFilter
 from django.contrib import messages
 import bcrypt
+from django.db.models import Avg
 
 
 # Create your views here.
@@ -18,7 +19,7 @@ def index(request):
         return render(request, "index.html", context)
 
 def the_list(request):
-    company_list = Company.objects.all()
+    company_list = Company.objects.annotate(avg_rating=Avg('has_reviews__rating'))
     if 'user_id' in request.session:
         context={
             'companies': CompanyFilter(request.GET, queryset=company_list),
@@ -31,7 +32,7 @@ def the_list(request):
     return render(request, "list.html", context)
 
 def the_list_filtered(request):
-    company_list = Company.objects.all()
+    company_list = Company.objects.annotate(avg_rating=Avg('has_reviews__rating'))
     context={
         'companies': CompanyFilter(request.GET, queryset=company_list)
     }

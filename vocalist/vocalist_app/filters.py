@@ -9,15 +9,17 @@ class CompanyFilter(django_filters.FilterSet):
     housing = django_filters.CharFilter(lookup_expr="icontains")
     travel_stipend = django_filters.CharFilter(lookup_expr="icontains")
     benefits = django_filters.CharFilter(lookup_expr="icontains")
+    avg_rating = django_filters.CharFilter()
     
     o = django_filters.OrderingFilter(
         fields=(
             ('name', 'name'),
             ('weekly_stipend', 'weekly_stipend'),
+            ('avg_rating', 'avg_rating'),
         ),
     )
 
         
     class Meta:
         model = Company
-        fields = ['name', 'weekly_stipend', 'housing', 'agma', 'travel_stipend', 'benefits', 'category']
+        fields = ['name', 'weekly_stipend', 'housing', 'agma', 'travel_stipend', 'benefits', 'category', 'avg_rating']
